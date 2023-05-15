@@ -10,4 +10,10 @@ export class NotesComponent {
 
   constructor(private toastr: ToastrService){}
   // this.toastr.success('Hello world!', 'Toastr fun!');
+
+
+  listAdded(){
+    console.log('object');
+  }
+
 }

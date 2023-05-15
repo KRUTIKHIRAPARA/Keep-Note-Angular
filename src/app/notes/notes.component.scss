@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&family=IBM+Plex+Serif:wght@300&family=K2D:wght@200&display=swap');
+
+::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  
+.searchBox{
+    width: 30%;
+    border: none;
+    outline: none;
+    color: #ABABAB;
+    font-family: 'inter';
+    border-radius: 10px;
+    // box-shadow: 1px 1px 2px rgb(153, 153, 153);
+
+    -webkit-box-shadow: inset 0px 0px 5px 0px rgba(161,161,161,1);
+    -moz-box-shadow: inset 0px 0px 5px 0px rgba(161,161,161,1);
+    box-shadow: inset 0px 0px 5px 0px rgba(161,161,161,1);
+}
+
+.taskAddBtnHeader{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    
+    a{
+        font-size: 20px;
+        color: #ABABAB;
+        font-family: 'Inter';
+        letter-spacing: 2px;
+    }
+}
+
+.taskUpperHeader{
+    width: 40%;
+}
+
+.taskBody{
+    width: 40%;
+}
+
+.itemAddBtn{
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.singleListPart{
+    border-radius: 5px;
+
+    -webkit-box-shadow: inset 0px 0px 5px 0px rgb(0, 0, 0);
+    -moz-box-shadow: inset 0px 0px 5px 0px rgba(161,161,161,1);
+    box-shadow: inset 0px 0px 5px 0px rgba(161,161,161,1);
+
+    .singleListHeader{
+        font-family: 'Lato';
+        font-weight: 100;
+        font-size: 23px;
+        letter-spacing: 1px;
+        color: #222121;
+    }
+
+    .singleListItemInerItems{
+        height: 130px;
+        overflow: auto;
+    }
+
+    .singleListHeaderPart{
+        border-radius: 25px 0px 0px 0px;
+    }
+
+    .editBtn{
+        color:green;
+        &:hover{
+            color: rgb(4, 213, 35);
+        }
+    }
+
+    .deleteBtn{
+        color:red;
+        &:hover{
+            color: rgb(225, 4, 4);
+        }
+    }
+
+
+    .singleListItemCheck{
+        color: #696767;
+    }
+
+    .singleListItem{
+        font-family: 'Laila';
+        font-weight: 100;
+        letter-spacing: 1px;
+        color: #696767;
+    }
+
+    .singleListItemDate{
+        color:#ABABAB ;
+        font-family: 'Castoro Titling', cursive;
+        font-family: 'IBM Plex Serif', serif;
+        font-family: 'K2D', sans-serif;
+        border: none;
+    }
+}
+
+
+@media screen and (max-width:1400px) {
+    .taskUpperHeader, .taskBody{
+        width: 50% !important;
+    }
+
+    .searchBox{
+        width: 35% !important;
+    }
+
+    .itemsContainer{
+        height: 150px;
+    }
+
+    .itemTitle{
+        font-size: 25px;
+    }
+
+    .itemAddBtn{
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width:1200px) {
+    .taskUpperHeader, .taskBody{
+        width: 60% !important;
+    }
+
+    .searchBox{
+        width: 35% !important;
+    }
+
+    .itemsContainer{
+        height: 150px;
+    }
+
+    .itemTitle{
+        font-size: 23px;
+    }
+
+    .itemAddBtn{
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .taskUpperHeader, .taskBody{
+        width: 95% !important;
+    }
+
+    .searchBox{
+        width: 70% !important;
+    }
+
+    .itemTitle{
+        font-size: 21px;
+    }
+
+    .itemAddBtn{
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width:662px) {
+    .taskUpperHeader, .taskBody{
+        width: 90% !important;
+    }
+
+    .searchBox{
+        width: 80% !important;
+    }
+
+    .itemTitle{
+        font-size: 19px;
+    }
+
+    .itemAddBtn{
+        font-size: 16px;
+    }
+}
