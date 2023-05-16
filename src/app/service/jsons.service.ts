@@ -14,7 +14,7 @@ export class JsonsService {
     return this._http.get<Array<Tasks>>(this.jsonUrl);
   }
 
-  addJsonData(body:any){
+  addJsonData(body:Tasks){
     return this._http.post(this.jsonUrl,body);
   }
 
