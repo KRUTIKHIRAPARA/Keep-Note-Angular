@@ -12,6 +12,8 @@ export class NotesComponent {
   getlistArray?: Tasks;
   allListArray: Array<Tasks> = new Array<Tasks>();
 
+  updateAddBtn = false;
+
   constructor(private _toastr: ToastrService, private _jsons: JsonsService) { }
   
   ngOnInit(): void {
@@ -32,21 +34,57 @@ export class NotesComponent {
   }
 
   getAllList() {
-    this._jsons.getJsonData().subscribe({
+    this._jsons.getListData().subscribe({
       next: (res) => {
         this.allListArray = res;
-        console.log(res);
+      },
+      error:(err)=>{
+        console.log(err);
       }
     });
   }
 
   addNewList() {
-    this._jsons.addJsonData(this.getlistArray).subscribe({
-      next: () => {
-        console.log('Successfully Data Added');
+    if(this.getlistArray.taskName){
+      this._jsons.addListData(this.getlistArray).subscribe({
+        next: (res) => {
+          this.getAllList();
+          this.getlistArray = new Tasks;
+          this.addBlankItem();
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    }
+  }
+
+  fillData(data:Tasks){
+    this.getlistArray = data;
+    this.updateAddBtn = true;
+  }
+  
+  editList(){
+    this._jsons.editListData(this.getlistArray).subscribe({
+      next: (res) => {
+        this.updateAddBtn = false;
+        this.getAllList();
+        this.getlistArray = new Tasks;
+        this.addBlankItem();
       },
-      error: () => {
-        console.log('Error');
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  deleteList(body){
+    this._jsons.deleteListData(body).subscribe({
+      next: (res) => {
+        this.getAllList();
+      },
+      error: (err) => {
+        console.log(err);
       }
     });
   }

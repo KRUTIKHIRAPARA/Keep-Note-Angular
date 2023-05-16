@@ -36,7 +36,10 @@
                       </ul>
                     </li>
                     <ul class="d-flex justify-content-between">
-                      <li class="list-group" (click)="addNewList()"><h1><i class="bi bi-file-earmark-plus-fill text-success"></i></h1></li>
+                      <li class="list-group" (click)="updateAddBtn == false ? addNewList() : editList()"><h1>
+                        <i *ngIf="!updateAddBtn" class="bi bi-file-earmark-plus-fill text-info"></i>
+                        <i *ngIf="updateAddBtn" class="bi bi-pencil-square text-success"></i>
+                      </h1></li>
                     </ul>
                     <li class="list-group-item"></li>
                   </ul>
@@ -60,15 +63,15 @@
               <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
                 <p class="my-auto singleListHeader">{{ d.taskName }}</p>
                 <div>
-                  <i class=" bi bi-pencil-square btn fs-5 editBtn"></i>
-                  <i class="bi bi-trash3-fill btn fs-5 deleteBtn"></i>
+                  <i class=" bi bi-pencil-square btn fs-5 editBtn" (click)="fillData(d)"></i>
+                  <i class="bi bi-trash3-fill btn fs-5 deleteBtn" (click)="deleteList(d)"></i>
                 </div>
               </div>
               <div class="card-body text-dark">
                 <ul  class="list-group list-group-flush  singleListItemInerItems">
                   <ng-container *ngFor="let it of d.taskItems">
                     <li class="list-group-item d-flex">
-                      <input type="checkbox" [checked]="it.isCompleted" class="me-2 singleListItemCheck">
+                      <input type="checkbox" disabled [checked]="it.isCompleted" class="me-2 singleListItemCheck">
                       <span class="singleListItem"><del *ngIf="it.isCompleted"> {{ it.item }} </del> <span *ngIf="!it.isCompleted">{{ it.item }}</span></span>
                     </li>
                   </ng-container>

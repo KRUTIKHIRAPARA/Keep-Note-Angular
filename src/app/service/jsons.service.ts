@@ -6,16 +6,28 @@ import { Injectable } from '@angular/core';
 })
 export class JsonsService {
 
-  jsonUrl= 'http://localhost:3000/keepNotes';
+  listAPILink= 'http://localhost:3000/keepNotes';
 
   constructor(private _http: HttpClient) { }
 
-  getJsonData(){
-    return this._http.get<Array<Tasks>>(this.jsonUrl);
+  // Get List From API
+  getListData(){
+    return this._http.get<Array<Tasks>>(this.listAPILink);
   }
-
-  addJsonData(body:Tasks){
-    return this._http.post(this.jsonUrl,body);
+  
+  // Add List From API
+  addListData(body:Tasks){
+    return this._http.post(this.listAPILink,body);
+  }
+  
+  // Edit List From API
+  editListData(body:Tasks){
+    return this._http.put(`${this.listAPILink}/${body.id}`,body);
+  }
+  
+  // Delele List From API
+  deleteListData(body:Tasks){
+    return this._http.delete(`${this.listAPILink}/${body.id}`);
   }
 
 }
