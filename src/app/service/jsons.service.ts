@@ -6,12 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class JsonsService {
 
-  constructor(private _http: HttpClient) { }
-
   jsonUrl= 'http://localhost:3000/keepNotes';
 
+  constructor(private _http: HttpClient) { }
+
   getJsonData(){
-    return this._http.get(this.jsonUrl);
+    return this._http.get<Array<Tasks>>(this.jsonUrl);
   }
 
   addJsonData(body:any){
@@ -28,5 +28,5 @@ export class Tasks{
 
 export class TaskItem{
   item?:string;
-  isCompleted?:boolean;
+  isCompleted:boolean = false;
 }

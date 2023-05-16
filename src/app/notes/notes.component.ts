@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { JsonsService, List, ListOfItems } from '../service/jsons.service';
+import { JsonsService, TaskItem, Tasks } from '../service/jsons.service';
 
 @Component({
   selector: 'app-notes',
@@ -8,66 +8,48 @@ import { JsonsService, List, ListOfItems } from '../service/jsons.service';
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent {
+  
+  getlistArray?: Tasks;
+  allListArray: Array<Tasks> = new Array<Tasks>();
 
-  constructor(private _toastr: ToastrService, private _jsons: JsonsService){}
-  // this.toastr.success('Hello world!', 'Toastr fun!');
-
-  dynamicArray: Array<ListOfItems> = [];  
-  newDynamic: any = {};  
-
-  taskName?:string ;
-  getlistArray:Array<List> = [];
-  allListArray: Array<List> = new Array();
-
-  ngOnInit(): void {  
-      this.newDynamic = {completed: false, item: ""};  
-      this.dynamicArray.push(this.newDynamic);  
-    console.log(this.allListArray);
-      this.getAllList();
-  }  
-
-  addRow() {    
-    this.newDynamic = {completed: false, item: ""};  
-    this.dynamicArray.push(this.newDynamic); 
-    console.log('New row added successfully');
-    console.log(this.dynamicArray);  
-    return true;  
-  } 
-
-  deleteRow(index:any) {  
-    if(this.dynamicArray.length ==1) {  
-      console.log('Cant delete the row when there is only one row');  
-        return false;  
-    } else {  
-        this.dynamicArray.splice(index, 1); 
-        console.log('Row deleted successfully');
-        return true;  
-    }  
-}  
-
-addNewList(){
-  let body ={
-    task : this.taskName, 
-    listOfItems : this.dynamicArray
+  constructor(private _toastr: ToastrService, private _jsons: JsonsService) { }
+  
+  ngOnInit(): void {
+    this.getlistArray = new Tasks;
+    this.getlistArray.taskItems = new Array<TaskItem>();
+    this.getAllList();
+    this.addBlankItem();
   }
-  this._jsons.addJsonData(body).subscribe({
-    next:()=>{
-      console.log('Successfully Data Added');
-    },
-    error:()=>{
-      console.log('Error');
-    }
-  });
-}
 
-getAllList(){
-  this._jsons.getJsonData().subscribe({
-    next:(res)=>{
-      this.allListArray.push(res);
-      console.log(res);
+  addBlankItem() {
+    this.getlistArray.taskItems.push(new TaskItem());
+  }
+
+  removeBlankItem(i) {
+    if(this.getlistArray.taskItems.length != 1){
+      this.getlistArray.taskItems.splice(i, 1);
     }
-  });
-}
+  }
+
+  getAllList() {
+    this._jsons.getJsonData().subscribe({
+      next: (res) => {
+        this.allListArray = res;
+        console.log(res);
+      }
+    });
+  }
+
+  addNewList() {
+    this._jsons.addJsonData(this.getlistArray).subscribe({
+      next: () => {
+        console.log('Successfully Data Added');
+      },
+      error: () => {
+        console.log('Error');
+      }
+    });
+  }
 
 }
 
