@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NotesComponent } from './notes/notes.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     ToastrModule.forRoot(),
   ],
   providers: [],

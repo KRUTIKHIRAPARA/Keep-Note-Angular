@@ -25,27 +25,20 @@
           <div class="collapse taskBody " id="collapseExample">
                 <div class="card card-body">
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item "><input type="text" class="form-control mb-1 itemTitle" id="floatingInput" placeholder="Title"></li>
-                    <li class="list-group-item ">
-                      <ul class="list-group list-group-flush overflow-auto itemsContainer" style="height: 100px;">
+                    <li class="list-group-item "><input type="text" class="form-control mb-1 itemTitle" id="floatingInput" [(ngModel)]="taskName" placeholder="Title"></li>
+                    <li class="list-group-item overflow-auto"  style="height: 130px;">
+                      <ul *ngFor="let dynamic of dynamicArray; let i = index;" class="list-group list-group-flush  itemsContainer">
                         <li class="list-group-item d-flex">
-                          <span><i class="bi bi-plus-lg"></i></span> 
-                          <!-- <input type="checkbox"> -->
-                          <input type="text" class=" ps-2 itemAddBtn" placeholder="List item" (keypress)="listAdded()">
-                        </li>
-                        <li class="list-group-item d-flex">
-                          <!-- <span><i class="bi bi-plus-lg"></i></span>  -->
-                          <input type="checkbox">
-                          <input type="text" class=" ps-2 itemAddBtn" placeholder="List item" (keypress)="listAdded()">
-                        </li>
-                        <li class="list-group-item d-flex">
-                          <span><i class="bi bi-plus-lg"></i></span> 
-                          <!-- <input type="checkbox"> -->
-                          <input type="text" class=" ps-2 itemAddBtn" placeholder="List item" (keypress)="listAdded()">
-                        </li>
+                            <i class="bi bi-x-lg me-2" (click)="deleteRow(i)"></i>  
+                            <input class="form-check-input" [(ngModel)]="dynamicArray[i].isCompleted"   type="checkbox" value="" id="flexCheckDefault">
+                            <input type="text" [(ngModel)]="dynamicArray[i].item" [autofocus]="true"  [tabIndex]="dynamicArray[i]"  class=" ps-2 itemAddBtn" name="item" (keyup.enter)="addRow()"  placeholder="List item">  
+                        </li>             
                       </ul>
                     </li>
-                   
+                    <ul class="d-flex justify-content-between">
+                      <!-- <li class="list-group " (click)="addRow()"><h3><i class="bi bi-plus-lg"></i></h3></li> -->
+                      <li class="list-group" (click)="addNewList()"><h1><i class="bi bi-file-earmark-plus-fill text-success"></i></h1></li>
+                    </ul>
                     <li class="list-group-item"></li>
                   </ul>
                 </div>
@@ -59,269 +52,77 @@
 
   <!-- To-do List Show -->
 
+
+
+
   <section>
     <div class="container overflow-auto" style="height: 590px;">
       <div class="row d-flex justify-content-around">
 
-        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
-          <div class="card mb-3 singleListPart ">
-            <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
-              <p class="my-auto singleListHeader">Shopping</p>
-              <div>
-                <!-- <button type="button" class="btn btn-outline-success me-2"><i class=" bi bi-pencil-square"></i></button> -->
-                <i class=" bi bi-pencil-square btn fs-5 editBtn"></i>
-                <!-- <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button> -->
-                <i class="bi bi-trash3-fill btn fs-5 deleteBtn"></i>
+        <ng-container *ngFor="let d of allListArray">
+          <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
+            <div class="card mb-3 singleListPart ">
+              <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
+                <p class="my-auto singleListHeader">{{ d.task }}</p>
+                <div>
+                  <!-- <button type="button" class="btn btn-outline-success me-2"><i class=" bi bi-pencil-square"></i></button> -->
+                  <i class=" bi bi-pencil-square btn fs-5 editBtn"></i>
+                  <!-- <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button> -->
+                  <i class="bi bi-trash3-fill btn fs-5 deleteBtn"></i>
+                </div>
               </div>
-            </div>
-            <div class="card-body text-dark">
-              <ul class="list-group list-group-flush  singleListItemInerItems">
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Cloths</span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Pen-drive</span>
-                </li>
-              </ul>
-            </div>
-            <div class="card-footer bg-transparent border-dark singleListItemDate">30 Dec, 2023</div>
-          </div>
-        </div>
-        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
-          <div class="card mb-3 singleListPart ">
-            <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
-              <p class="my-auto singleListHeader">Shopping</p>
-              <div>
-                <!-- <button type="button" class="btn btn-outline-success me-2"><i class=" bi bi-pencil-square"></i></button> -->
-                <i class=" bi bi-pencil-square btn fs-5 editBtn"></i>
-                <!-- <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button> -->
-                <i class="bi bi-trash3-fill btn fs-5 deleteBtn"></i>
+              <div class="card-body text-dark">
+                <ul class="list-group list-group-flush  singleListItemInerItems">
+                  <li class="list-group-item d-flex">
+                    <input type="checkbox" class="me-2 singleListItemCheck">
+                    <span class="singleListItem">Cloths</span>
+                  </li>
+                  <li class="list-group-item d-flex">
+                    <input type="checkbox" checked class="me-2 singleListItemCheck">
+                    <span class="singleListItem"> <del> Mobile </del></span>
+                  </li>
+                  <li class="list-group-item d-flex">
+                    <input type="checkbox" checked class="me-2 singleListItemCheck">
+                    <span class="singleListItem"> <del> Mobile </del></span>
+                  </li>
+                  <li class="list-group-item d-flex">
+                    <input type="checkbox" checked class="me-2 singleListItemCheck">
+                    <span class="singleListItem"> <del> Mobile </del></span>
+                  </li>
+                  <li class="list-group-item d-flex">
+                    <input type="checkbox" checked class="me-2 singleListItemCheck">
+                    <span class="singleListItem"> <del> Mobile </del></span>
+                  </li>
+                  <li class="list-group-item d-flex">
+                    <input type="checkbox" checked class="me-2 singleListItemCheck">
+                    <span class="singleListItem"> <del> Mobile </del></span>
+                  </li>
+                  <li class="list-group-item d-flex">
+                    <input type="checkbox" checked class="me-2 singleListItemCheck">
+                    <span class="singleListItem"> <del> Mobile </del></span>
+                  </li>
+                  <li class="list-group-item d-flex">
+                    <input type="checkbox" class="me-2 singleListItemCheck">
+                    <span class="singleListItem">Pen-drive</span>
+                  </li>
+                </ul>
               </div>
+              <div class="card-footer bg-transparent border-dark singleListItemDate">30 Dec, 2023</div>
             </div>
-            <div class="card-body text-dark">
-              <ul class="list-group list-group-flush  singleListItemInerItems">
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Cloths</span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Pen-drive</span>
-                </li>
-              </ul>
-            </div>
-            <div class="card-footer bg-transparent border-dark singleListItemDate">30 Dec, 2023</div>
           </div>
-        </div>
-        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
-          <div class="card mb-3 singleListPart ">
-            <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
-              <p class="my-auto singleListHeader">Shopping</p>
-              <div>
-                <!-- <button type="button" class="btn btn-outline-success me-2"><i class=" bi bi-pencil-square"></i></button> -->
-                <i class=" bi bi-pencil-square btn fs-5 editBtn"></i>
-                <!-- <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button> -->
-                <i class="bi bi-trash3-fill btn fs-5 deleteBtn"></i>
-              </div>
-            </div>
-            <div class="card-body text-dark">
-              <ul class="list-group list-group-flush  singleListItemInerItems">
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Cloths</span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Pen-drive</span>
-                </li>
-              </ul>
-            </div>
-            <div class="card-footer bg-transparent border-dark singleListItemDate">30 Dec, 2023</div>
-          </div>
-        </div>
-        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
-          <div class="card mb-3 singleListPart ">
-            <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
-              <p class="my-auto singleListHeader">Shopping</p>
-              <div>
-                <!-- <button type="button" class="btn btn-outline-success me-2"><i class=" bi bi-pencil-square"></i></button> -->
-                <i class=" bi bi-pencil-square btn fs-5 editBtn"></i>
-                <!-- <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button> -->
-                <i class="bi bi-trash3-fill btn fs-5 deleteBtn"></i>
-              </div>
-            </div>
-            <div class="card-body text-dark">
-              <ul class="list-group list-group-flush  singleListItemInerItems">
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Cloths</span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Pen-drive</span>
-                </li>
-              </ul>
-            </div>
-            <div class="card-footer bg-transparent border-dark singleListItemDate">30 Dec, 2023</div>
-          </div>
-        </div>
-        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
-          <div class="card mb-3 singleListPart ">
-            <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
-              <p class="my-auto singleListHeader">Shopping</p>
-              <div>
-                <!-- <button type="button" class="btn btn-outline-success me-2"><i class=" bi bi-pencil-square"></i></button> -->
-                <i class=" bi bi-pencil-square btn fs-5 editBtn"></i>
-                <!-- <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button> -->
-                <i class="bi bi-trash3-fill btn fs-5 deleteBtn"></i>
-              </div>
-            </div>
-            <div class="card-body text-dark">
-              <ul class="list-group list-group-flush  singleListItemInerItems">
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Cloths</span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Pen-drive</span>
-                </li>
-              </ul>
-            </div>
-            <div class="card-footer bg-transparent border-dark singleListItemDate">30 Dec, 2023</div>
-          </div>
-        </div>
+        </ng-container>
+        
 
+        
+        
+
+<!--
         <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
           <div class="card mb-3 singleListPart ">
             <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
               <p class="my-auto singleListHeader">Shopping</p>
               <div>
-                <!-- <button type="button" class="btn btn-outline-success me-2"><i class=" bi bi-pencil-square"></i></button> -->
                 <i class=" bi bi-pencil-square btn fs-5 editBtn"></i>
-                <!-- <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button> -->
                 <i class="bi bi-trash3-fill btn fs-5 deleteBtn"></i>
               </div>
             </div>
@@ -364,215 +165,7 @@
             <div class="card-footer bg-transparent border-dark singleListItemDate">30 Dec, 2023</div>
           </div>
         </div>
-
-
-        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
-          <div class="card mb-3 singleListPart ">
-            <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
-              <p class="my-auto singleListHeader">Shopping</p>
-              <div>
-                <!-- <button type="button" class="btn btn-outline-success me-2"><i class=" bi bi-pencil-square"></i></button> -->
-                <i class=" bi bi-pencil-square btn fs-5 editBtn"></i>
-                <!-- <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button> -->
-                <i class="bi bi-trash3-fill btn fs-5 deleteBtn"></i>
-              </div>
-            </div>
-            <div class="card-body text-dark">
-              <ul class="list-group list-group-flush overflow-auto singleListItemInerItems">
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Cloths</span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Pen-drive</span>
-                </li>
-              </ul>
-            </div>
-            <div class="card-footer bg-transparent border-dark singleListItemDate">30 Dec, 2023</div>
-          </div>
-        </div>
-
-
-        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
-          <div class="card mb-3 singleListPart ">
-            <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
-              <p class="my-auto singleListHeader">Shopping</p>
-              <div>
-                <!-- <button type="button" class="btn btn-outline-success me-2"><i class=" bi bi-pencil-square"></i></button> -->
-                <i class=" bi bi-pencil-square btn fs-5 editBtn"></i>
-                <!-- <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button> -->
-                <i class="bi bi-trash3-fill btn fs-5 deleteBtn"></i>
-              </div>
-            </div>
-            <div class="card-body text-dark">
-              <ul class="list-group list-group-flush overflow-auto singleListItemInerItems">
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Cloths</span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Pen-drive</span>
-                </li>
-              </ul>
-            </div>
-            <div class="card-footer bg-transparent border-dark singleListItemDate">30 Dec, 2023</div>
-          </div>
-        </div>
-
-
-        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
-          <div class="card mb-3 singleListPart ">
-            <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
-              <p class="my-auto singleListHeader">Shopping</p>
-              <div>
-                <!-- <button type="button" class="btn btn-outline-success me-2"><i class=" bi bi-pencil-square"></i></button> -->
-                <i class=" bi bi-pencil-square btn fs-5 editBtn"></i>
-                <!-- <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button> -->
-                <i class="bi bi-trash3-fill btn fs-5 deleteBtn"></i>
-              </div>
-            </div>
-            <div class="card-body text-dark">
-              <ul class="list-group list-group-flush overflow-auto singleListItemInerItems">
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Cloths</span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Pen-drive</span>
-                </li>
-              </ul>
-            </div>
-            <div class="card-footer bg-transparent border-dark singleListItemDate">30 Dec, 2023</div>
-          </div>
-        </div>
-
-
-        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
-          <div class="card mb-3 singleListPart ">
-            <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
-              <p class="my-auto singleListHeader">Shopping</p>
-              <div>
-                <!-- <button type="button" class="btn btn-outline-success me-2"><i class=" bi bi-pencil-square"></i></button> -->
-                <i class=" bi bi-pencil-square btn fs-5 editBtn"></i>
-                <!-- <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button> -->
-                <i class="bi bi-trash3-fill btn fs-5 deleteBtn"></i>
-              </div>
-            </div>
-            <div class="card-body text-dark">
-              <ul class="list-group list-group-flush overflow-auto singleListItemInerItems">
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Cloths</span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" checked class="me-2 singleListItemCheck">
-                  <span class="singleListItem"> <del> Mobile </del></span>
-                </li>
-                <li class="list-group-item d-flex">
-                  <input type="checkbox" class="me-2 singleListItemCheck">
-                  <span class="singleListItem">Pen-drive</span>
-                </li>
-              </ul>
-            </div>
-            <div class="card-footer bg-transparent border-dark singleListItemDate">30 Dec, 2023</div>
-          </div>
-        </div>
-
+-->
 
        
       </div>
