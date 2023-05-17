@@ -3,9 +3,11 @@
 <nav class="navbar navbar-expand navbar-light">
     <div class="container flex-lg-row flex-md-row flex-sm-column flex-column">
 
+      <!-- Logo -->
         <a class="navbar-brand" href="#"><img src="../../assets/logo.png" class="mb-md-0 mb-sm-2 mb-2" style="width: 150px;"></a>
 
-        <input class="form-control me-2 mb-md-0 mb-sm-2 mb-2 searchBox fs-5 ps-md-5" type="search" placeholder="Search" aria-label="Search">
+      <!-- Search Part -->
+        <input class="form-control me-2 mb-md-0 mb-sm-2 mb-2 searchBox fs-5 ps-md-5" autocomplete="off" [(ngModel)]="searchVal" (keyup)="searchList()"  name="search" type="search" placeholder="Search" aria-label="Search">
     </div>
   </nav>
 
@@ -25,21 +27,30 @@
           <div class="collapse taskBody " id="collapseExample">
                 <div class="card card-body">
                   <ul class="list-group list-group-flush">
-                    <li class= "list-group-item "><input type="text" class="form-control mb-1 itemTitle" name="title" id="floatingInput" [(ngModel)]="getlistArray.taskName" placeholder="Title"></li>
+                    <li class= "list-group-item "><input type="text" class="form-control mb-1 text-capitalize itemTitle" name="title" id="floatingInput" [(ngModel)]="getlistArray.taskName" placeholder="Title" ></li>
                     <li class="list-group-item overflow-auto"  style="height: 130px;">
+                      
+                      <!-- Dynamic Added & Updated Part Start -->
                       <ul *ngFor="let itemAdd of getlistArray.taskItems; let i = index;" class="list-group list-group-flush  itemsContainer">
                         <li class="list-group-item d-flex">
-                            <i class="bi bi-x-lg me-2" (click)="removeBlankItem(i)"></i>
-                            <input class="form-check-input"  [(ngModel)]="itemAdd.isCompleted" type="checkbox" value="" id="flexCheckDefault">
-                            <input type="text"  class=" ps-2 itemAddBtn" name="item" [(ngModel)]="itemAdd.item"  (keyup.enter)="addBlankItem()"  placeholder="List item">  
+                          <i class="bi bi-x-lg me-2" (click)="removeBlankItem(i)"></i>
+                          <input class="form-check-input"  [(ngModel)]="itemAdd.isCompleted" type="checkbox" value="" id="flexCheckDefault">
+                          <input type="text"  class=" ps-2 itemAddBtn" name="item" [(ngModel)]="itemAdd.item"  (keyup.enter)="addBlankItem()"  placeholder="List item">  
                         </li>             
                       </ul>
+                      <!-- Dynamic Added & Updated End -->
+
                     </li>
                     <ul class="d-flex justify-content-between">
+
+                      <!-- Edit & Add Data Part Start -->
                       <li class="list-group" (click)="updateAddBtn == false ? addNewList() : editList()"><h1>
-                        <i *ngIf="!updateAddBtn" class="bi bi-file-earmark-plus-fill text-info"></i>
-                        <i *ngIf="updateAddBtn" class="bi bi-pencil-square text-success"></i>
+                        <i *ngIf="!updateAddBtn" data-bs-toggle="collapse" href="#collapseExample" class="bi bi-file-earmark-plus-fill text-info"></i>
+                        <i *ngIf="updateAddBtn" data-bs-toggle="collapse" href="#collapseExample" class="bi bi-pencil-square text-success"></i>
                       </h1></li>
+                      <!-- Edit & Add Data Part End -->
+
+
                     </ul>
                     <li class="list-group-item"></li>
                   </ul>
@@ -57,13 +68,14 @@
     <div class="container overflow-auto" style="height: 590px;">
       <div class="row d-flex justify-content-around">
 
+        <!-- All Data & List Show Part Start -->
         <ng-container *ngFor="let d of allListArray">
           <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
             <div class="card mb-3 singleListPart ">
               <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
-                <p class="my-auto singleListHeader">{{ d.taskName }}</p>
+                <p class="my-auto text-capitalize singleListHeader">{{ d.taskName }}</p>
                 <div>
-                  <i class=" bi bi-pencil-square btn fs-5 editBtn" (click)="fillData(d)"></i>
+                  <i class=" bi bi-pencil-square btn fs-5 editBtn" data-bs-toggle="collapse" href="#collapseExample" (click)="fillData(d)"></i>
                   <i class="bi bi-trash3-fill btn fs-5 deleteBtn" (click)="deleteList(d)"></i>
                 </div>
               </div>
@@ -77,11 +89,12 @@
                   </ng-container>
                 </ul>
               </div>
-              <div class="card-footer bg-transparent border-dark singleListItemDate">30 Dec, 2023</div>
+              <div class="card-footer bg-transparent border-dark singleListItemDate">{{ d.date | date}}</div>
             </div>
           </div>
         </ng-container>
-       
+        <!-- All Data & List Show Part End -->
+        
       </div>
     </div>  
   </section>

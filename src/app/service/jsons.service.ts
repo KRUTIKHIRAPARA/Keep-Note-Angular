@@ -35,6 +35,7 @@ export class JsonsService {
 export class Tasks{
   id?:number;
   taskName?:string;
+  date:Date|any = new Date();
   taskItems?:Array<TaskItem> = new Array<TaskItem>();
 }
 
