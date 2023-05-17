@@ -81,6 +81,10 @@
         {
           "isCompleted": false,
           "item": "Write Test Case"
+        },
+        {
+          "isCompleted": true,
+          "item": "Service File Test Case"
         }
       ],
       "taskName": "Today",
