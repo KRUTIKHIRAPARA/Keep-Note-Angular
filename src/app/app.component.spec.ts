@@ -4,17 +4,23 @@ import { AppComponent } from './app.component';
 import { NotesComponent } from './notes/notes.component';
 import { ToastrModule } from 'ngx-toastr';
 
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot(),
+        HttpClientModule
       ],
       declarations: [
         AppComponent,
         NotesComponent
       ],
+      providers:[
+        HttpClient
+      ]
     }).compileComponents();
   });
 

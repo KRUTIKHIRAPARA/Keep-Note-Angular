@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NotesComponent } from './notes.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 describe('NotesComponent', () => {
   let component: NotesComponent;
@@ -13,7 +14,11 @@ describe('NotesComponent', () => {
       declarations: [ NotesComponent ],
       imports:[
         ToastrModule.forRoot(),
-        FormsModule
+        FormsModule,
+        HttpClientModule
+      ],
+      providers:[
+        HttpClient,
       ]
     })
     .compileComponents();
