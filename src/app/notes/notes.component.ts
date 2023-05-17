@@ -18,6 +18,9 @@ export class NotesComponent {
   // Edit and Update Button Toogle
   updateAddBtn = false;
 
+  // Fill Data But Second Time Button Click Then Not Fill Data
+  fillBtn = true;
+
   // Search Value
   searchVal: string;
 
@@ -64,8 +67,8 @@ export class NotesComponent {
       if (this.getlistArray.taskItems.filter(x => x.item)) {
         this._jsons.addListData(this.getlistArray).subscribe({
           next: (res) => {
-            this.getAllList();
             this.getlistArray = new Tasks;
+            this.getAllList();
             this.addBlankItem();
           },
           error: (err) => {
@@ -78,8 +81,17 @@ export class NotesComponent {
 
   // Edit Time Fill Data in Edit Fileds
   fillData(data: Tasks) {
-    this.getlistArray = data;
-    this.updateAddBtn = true;
+    if(this.fillBtn){
+      this.getlistArray = data;
+      this.updateAddBtn = true;
+      this.fillBtn = false;
+    }
+    else{
+      this.getlistArray = new Tasks;
+      this.fillBtn = true;
+      this.updateAddBtn = false;
+      this.addBlankItem();
+    }
   }
 
   // Edit Datas in API
@@ -87,8 +99,8 @@ export class NotesComponent {
     this._jsons.editListData(this.getlistArray).subscribe({
       next: (res) => {
         this.updateAddBtn = false;
-        this.getAllList();
         this.getlistArray = new Tasks;
+        this.getAllList();
         this.addBlankItem();
       },
       error: (err) => {
@@ -125,6 +137,24 @@ export class NotesComponent {
     else {
       this.getAllList();
     }
+  }
+
+  // Cancle Edit Data
+  cancelEditList(){
+    this.updateAddBtn = false;
+    this.fillBtn = true;
+    this.getlistArray = new Tasks;
+    this.getAllList();
+    this.addBlankItem();
+  }
+
+  // Cancle All Data
+  cancelAllData(){
+    this.updateAddBtn = false;
+    this.fillBtn = true;
+    this.getlistArray = new Tasks;
+    this.getAllList();
+    this.addBlankItem();
   }
 
 }
