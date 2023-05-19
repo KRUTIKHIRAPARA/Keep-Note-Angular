@@ -85,6 +85,10 @@
         {
           "isCompleted": true,
           "item": "Service File Test Case"
+        },
+        {
+          "isCompleted": false,
+          "item": "Learn angular material"
         }
       ],
       "taskName": "Today",

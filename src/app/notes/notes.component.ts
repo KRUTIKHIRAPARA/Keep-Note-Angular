@@ -157,6 +157,24 @@ export class NotesComponent {
     this.addBlankItem();
   }
 
+  // Desktop Task Remove
+  // removeDList(id,body){
+  //   this.allListArray.filter(x=>{
+  //     x.taskItems.splice(id,1);
+  //   })
+  //   this._jsons.editListData(body).subscribe({
+    //   next: (res) => {
+    //     this.updateAddBtn = false;
+    //     this.getlistArray = new Tasks;
+    //     this.getAllList();
+    //     this.addBlankItem();
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //   }
+    // });
+  // } 
+
 }
 
 
