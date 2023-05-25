@@ -6,12 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class JsonsService {
 
-  // listAPILink= 'http://localhost:3000/keepNotes';
-  // listAPILink= 'http://10.10.5.124:16100/Todo';
   listAPILink = 'http://10.10.5.124:16100/Todo';
   itemlistAPILink = 'http://10.10.5.124:16100/todo/task';
-  // listAPILink= 'http://10.10.5.107:16100/Todo';
-  // listAPILink= 'http://10.10.5.109:16100/Todo';
+
+  jdLink= 'http://10.10.5.109:16100/Todo';
+  // jdLink = 'http://10.10.5.109:16100/todo';
 
   constructor(private _http: HttpClient) { }
 
@@ -26,9 +25,8 @@ export class JsonsService {
   }
 
   // Edit Add List Of Items
-  addInnerListData(body) {
-    // return this._http.post(`${this.itemlistAPILink}`,body);
-    return this._http.post(`http://10.10.5.124:16100/todo/task`, body);
+  addInnerListData(TodoId,body) {
+    return this._http.post(`http://10.10.5.124:16100/todo/${TodoId}/task`,body);
   }
 
   // Edit List From API
@@ -37,8 +35,8 @@ export class JsonsService {
   }
 
   // Edit Inner List Of Items
-  editInnerListData(body) {
-    return this._http.put(`${this.itemlistAPILink}/${body.id}`, body);
+  editInnerListData(TodoId,body) {
+    return this._http.put(`http://10.10.5.124:16100/todo/${TodoId}/task/${body.id}`, body);
   }
 
   // Delele List From API
@@ -47,12 +45,12 @@ export class JsonsService {
   }
 
   // Delele Inner List Of Items
-  deleteInnerListData(body: Tasks) {
-    return this._http.delete(`${this.itemlistAPILink}/${body.id}`);
+  deleteInnerListData(TodoId,body: Tasks) {
+    return this._http.delete(`http://10.10.5.124:16100/todo/${TodoId}/task/${body.id}`);
   }
 
   // jdPost(body){
-  //   return this._http.post(`http://10.10.5.109:16100/todo`,body);
+  //   return this._http.post(`${this.jdLink}`,body);
   // }
 
 }

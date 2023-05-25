@@ -15,6 +15,9 @@ export class NotesComponent {
   // Store Get All Datas
   allListArray: Array<Tasks> = new Array<Tasks>();
 
+  // List Of Item Get Data
+  newOneTask:TaskItem;
+
   // Edit and Update Button Toogle
   updateAddBtn = false;
 
@@ -27,8 +30,7 @@ export class NotesComponent {
   // Search Value
   searchVal: string;
 
-  newOneTask:TaskItem;
-
+  // New Add Item Part
   addOneItemBtnToogle = false;
 
   constructor(private _toastr: ToastrService, private _jsons: JsonsService) { }
@@ -39,7 +41,7 @@ export class NotesComponent {
     this.getlistArray = new Tasks;
     this.getlistArray.tasks = new Array<TaskItem>();
     
-
+    // New Add List Of Items Define & Initilazation
     this.newOneTask = new TaskItem;
 
     // Methods
@@ -63,7 +65,6 @@ export class NotesComponent {
     this.getlistArray.tasks.push(new TaskItem());
   }
 
- 
   // Remove Row Dynamic
   removeBlankItem(i) {
     if (this.getlistArray.tasks.length != 1) {
@@ -71,12 +72,12 @@ export class NotesComponent {
     }
   }
 
-
   // Get All Datas In API
   getAllList() {
     this._jsons.getListData().subscribe({
       next: (res) => {
         this.allListArray = res;
+        console.log(res);
       },
       error: (err) => {
         console.log(err);
@@ -102,14 +103,19 @@ export class NotesComponent {
     }
   }
 
-  // Add New Inner List
+  // Add New Inner List & Add New List Of Items
   addFinalyListAction(id){
+
+    // Add Todo Id In New Add Items
+    let TodoId = id; 
 
     this.newOneTask.todoId = id;
 
-  
+    let onData = this.newOneTask;
+
     this.addInnerBtn = false;
-    this._jsons.addInnerListData(this.newOneTask).subscribe({
+
+    this._jsons.addInnerListData(TodoId,onData).subscribe({
       next: (res) => {
         this.getlistArray = new Tasks;
         this.newOneTask = new TaskItem;
@@ -122,8 +128,8 @@ export class NotesComponent {
     });
   }
 
+  // Toggle Inner List Of Item Added
   addOneItem(d:Tasks){
-    
     if(this.addOneItemBtnToogle)
     {
       d.isInput = true;
@@ -162,7 +168,7 @@ export class NotesComponent {
   // Edit Inner List Datas
   editInnerList() {
     this.getlistArray.tasks.forEach(element => {
-      this._jsons.editInnerListData(element).subscribe({
+      this._jsons.editInnerListData(this.getlistArray.id,element).subscribe({
         next: (res) => {
           this.updateAddBtn = false;
           this.getlistArray = new Tasks;
@@ -186,8 +192,8 @@ export class NotesComponent {
   }
 
   // Desktop Inner List Task Remove
-  deleteInnerTask(body){
-    this._jsons.deleteInnerListData(body).subscribe({
+  deleteInnerTask(TodoId,body){
+    this._jsons.deleteInnerListData(TodoId,body).subscribe({
       next: (res) => {
         this.getAllList();
       },
