@@ -21,8 +21,15 @@ export class NotesComponent {
   // Fill Data But Second Time Button Click Then Not Fill Data
   fillBtn = true;
 
+  // Add Inner List Button
+  addInnerBtn = false;
+
   // Search Value
   searchVal: string;
+
+  newOneTask:TaskItem;
+
+  addOneItemBtnToogle = false;
 
   constructor(private _toastr: ToastrService, private _jsons: JsonsService) { }
 
@@ -30,24 +37,40 @@ export class NotesComponent {
 
     // Data Binding Define & Initilazation
     this.getlistArray = new Tasks;
-    this.getlistArray.taskItems = new Array<TaskItem>();
+    this.getlistArray.tasks = new Array<TaskItem>();
+    
+
+    this.newOneTask = new TaskItem;
 
     // Methods
     this.getAllList();
     this.addBlankItem();
   }
 
-  // Add New Row Dynamic
-  addBlankItem() {
-    this.getlistArray.taskItems.push(new TaskItem());
+  jdTodoSend(){
+    this._jsons.jdPost(this.getlistArray).subscribe({
+      next:(res)=>{
+        console.log('Added Data Successfully...');
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    });
   }
 
+  // Add New Row Dynamic
+  addBlankItem() {
+    this.getlistArray.tasks.push(new TaskItem());
+  }
+
+ 
   // Remove Row Dynamic
   removeBlankItem(i) {
-    if (this.getlistArray.taskItems.length != 1) {
-      this.getlistArray.taskItems.splice(i, 1);
+    if (this.getlistArray.tasks.length != 1) {
+      this.getlistArray.tasks.splice(i, 1);
     }
   }
+
 
   // Get All Datas In API
   getAllList() {
@@ -63,8 +86,8 @@ export class NotesComponent {
 
   // Add Datas In API
   addNewList() {
-    if (this.getlistArray.taskName) {
-      if (this.getlistArray.taskItems.filter(x => x.item)) {
+    if (this.getlistArray.name) {
+      if (this.getlistArray.tasks.filter(x => x.name)) {
         this._jsons.addListData(this.getlistArray).subscribe({
           next: (res) => {
             this.getlistArray = new Tasks;
@@ -79,25 +102,52 @@ export class NotesComponent {
     }
   }
 
-  // Edit Time Fill Data in Edit Fileds
-  fillData(data: Tasks) {
-    if(this.fillBtn){
-      this.getlistArray = data;
-      this.updateAddBtn = true;
-      this.fillBtn = false;
+  // Add New Inner List
+  addFinalyListAction(id){
+
+    this.newOneTask.todoId = id;
+
+  
+    this.addInnerBtn = false;
+    this._jsons.addInnerListData(this.newOneTask).subscribe({
+      next: (res) => {
+        this.getlistArray = new Tasks;
+        this.newOneTask = new TaskItem;
+        this.getlistArray.isInput = false;
+        this.getAllList();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  addOneItem(d:Tasks){
+    
+    if(this.addOneItemBtnToogle)
+    {
+      d.isInput = true;
+      this.addOneItemBtnToogle = false;
     }
     else{
-      this.getlistArray = new Tasks;
-      this.fillBtn = true;
-      this.updateAddBtn = false;
-      this.addBlankItem();
+      d.isInput = false;
+      this.addOneItemBtnToogle = true;
     }
+  }
+
+  // Edit Time Fill Data in Edit Fileds
+  fillData(data: Tasks) {
+    this.getlistArray = data;
+      // this.addBlankItem();
+      this.updateAddBtn = true;
+      this.fillBtn = false;
   }
 
   // Edit Datas in API
   editList() {
     this._jsons.editListData(this.getlistArray).subscribe({
       next: (res) => {
+        this.editInnerList();
         this.updateAddBtn = false;
         this.getlistArray = new Tasks;
         this.getAllList();
@@ -109,17 +159,47 @@ export class NotesComponent {
     });
   }
 
+  // Edit Inner List Datas
+  editInnerList() {
+    this.getlistArray.tasks.forEach(element => {
+      this._jsons.editInnerListData(element).subscribe({
+        next: (res) => {
+          this.updateAddBtn = false;
+          this.getlistArray = new Tasks;
+          this.getAllList();
+          this.addBlankItem();
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    });
+  }
+
   // Delete Data in API
   deleteList(body) {
-    this._jsons.deleteListData(body).subscribe({
+    this._jsons.deleteListData(body).subscribe(res=>{
+    });
+    setTimeout(()=>{
+      this.getAllList();
+    },300)
+  }
+
+  // Desktop Inner List Task Remove
+  deleteInnerTask(body){
+    this._jsons.deleteInnerListData(body).subscribe({
       next: (res) => {
         this.getAllList();
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
-  }
+    setTimeout(()=>{
+      this.getAllList();
+    },300)
+
+  } 
 
   // Search Data in API
   searchList() {
@@ -148,32 +228,23 @@ export class NotesComponent {
     this.addBlankItem();
   }
 
-  // Cancle All Data
-  cancelAllData(){
-    this.updateAddBtn = false;
-    this.fillBtn = true;
+  // Cancle Add List Data
+  cancelAddList(){
     this.getlistArray = new Tasks;
+    this.addInnerBtn = false;
     this.getAllList();
     this.addBlankItem();
   }
 
-  // Desktop Task Remove
-  // removeDList(id,body){
-  //   this.allListArray.filter(x=>{
-  //     x.taskItems.splice(id,1);
-  //   })
-  //   this._jsons.editListData(body).subscribe({
-    //   next: (res) => {
-    //     this.updateAddBtn = false;
-    //     this.getlistArray = new Tasks;
-    //     this.getAllList();
-    //     this.addBlankItem();
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //   }
-    // });
-  // } 
+  // Cancle All Data
+  cancelAllData(){
+    this.getlistArray = new Tasks;
+    this.updateAddBtn = false;
+    this.addInnerBtn = false;
+    this.fillBtn = true;
+    this.getAllList();
+    this.addBlankItem();
+  }
 
 }
 
