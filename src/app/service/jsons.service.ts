@@ -51,9 +51,9 @@ export class JsonsService {
     return this._http.delete(`${this.itemlistAPILink}/${body.id}`);
   }
 
-  jdPost(body){
-    return this._http.post(`http://10.10.5.109:16100/todo`,body);
-  }
+  // jdPost(body){
+  //   return this._http.post(`http://10.10.5.109:16100/todo`,body);
+  // }
 
 }
 
@@ -72,6 +72,4 @@ export class TaskItem {
   todoId: number;
   name?: string;
   isCompleted: boolean = false;
-
-
 }

@@ -47,16 +47,16 @@ export class NotesComponent {
     this.addBlankItem();
   }
 
-  jdTodoSend(){
-    this._jsons.jdPost(this.getlistArray).subscribe({
-      next:(res)=>{
-        console.log('Added Data Successfully...');
-      },
-      error:(err)=>{
-        console.log(err);
-      }
-    });
-  }
+  // jdTodoSend(){
+  //   this._jsons.jdPost(this.getlistArray).subscribe({
+  //     next:(res)=>{
+  //       console.log('Added Data Successfully...');
+  //     },
+  //     error:(err)=>{
+  //       console.log(err);
+  //     }
+  //   });
+  // }
 
   // Add New Row Dynamic
   addBlankItem() {
