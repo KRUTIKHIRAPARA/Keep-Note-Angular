@@ -7,10 +7,6 @@ import { Injectable } from '@angular/core';
 export class JsonsService {
 
   listAPILink = 'http://10.10.5.124:16100/Todo';
-  itemlistAPILink = 'http://10.10.5.124:16100/todo/task';
-
-  jdLink= 'http://10.10.5.109:16100/Todo';
-  // jdLink = 'http://10.10.5.109:16100/todo';
 
   constructor(private _http: HttpClient) { }
 
@@ -19,7 +15,7 @@ export class JsonsService {
     return this._http.get<Array<Tasks>>(this.listAPILink);
   }
 
-  // Add List From API
+  // Add List From APIs
   addListData(body: Tasks) {
     return this._http.post(this.listAPILink, body);
   }
@@ -49,10 +45,6 @@ export class JsonsService {
     return this._http.delete(`http://10.10.5.124:16100/todo/${TodoId}/task/${body.id}`);
   }
 
-  // jdPost(body){
-  //   return this._http.post(`${this.jdLink}`,body);
-  // }
-
 }
 
 export class Tasks {
@@ -69,5 +61,5 @@ export class TaskItem {
   id: number;
   todoId: number;
   name?: string;
-  isCompleted: boolean = false;
+  isCompleted: boolean;
 }

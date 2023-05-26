@@ -34,7 +34,7 @@
                       <ul *ngFor="let itemAdd of getlistArray.tasks; let i = index;" class="list-group list-group-flush  itemsContainer">
                         <li class="list-group-item d-flex">
                           <i class="bi bi-x-lg me-2" (click)="removeBlankItem(i)"></i>
-                          <input class="form-check-input"  [(ngModel)]="itemAdd.isCompleted" type="checkbox" value="" id="flexCheckDefault">
+                          <input class="form-check-input"  [(ngModel)]="itemAdd.isCompleted" [checked]="itemAdd.isCompleted" type="checkbox" value="" id="flexCheckDefault">
                           <input type="text"  class=" ps-2 itemAddBtn" name="item" [(ngModel)]="itemAdd.name"  (keyup.enter)="addBlankItem()"  placeholder="List item">  
                         </li>             
                       </ul>
@@ -44,7 +44,7 @@
                     <ul class="d-flex justify-content-between">
 
                       <!-- Edit & Add Data Part Start -->
-                      <li class="list-group" (click)="updateAddBtn == false ? addNewList() : editList()">
+                      <li class="list-group" (click)="updateAddBtn == false ? addNewList() : editList() ">
                         <h1>
 
                           <!-- Add Button -->
@@ -91,7 +91,7 @@
                 <p class="my-auto text-capitalize singleListHeader">{{ d.name }}</p>
                 <div>
                   <i class=" bi bi-pencil-square btn fs-5 editBtn" data-bs-toggle="collapse" href="#collapseExample" (click)="fillData(d)"></i>
-                  <i class="bi bi-trash3-fill btn fs-5 deleteBtn" (click)="deleteList(d)"></i>
+                   <i class="bi bi-trash3-fill btn fs-5 deleteBtn" (click)="deleteList(d)"></i>
                 </div>
               </div>
               <div class="card-body text-dark">
@@ -99,10 +99,10 @@
                 <!-- Add New Task Items-->
                 <i class="bi bi-plus-lg text-primary me-2"  (click)="addOneItem(d)"></i>
 
-                <section *ngIf="d.isInput">
+                <span *ngIf="d.isInput">
                   <input type="checkbox" class="me-2" name="chk{{i}}" [(ngModel)]="newOneTask.isCompleted">
                   <input class="addTaslInnerList" name="list{{i}}" [(ngModel)]="newOneTask.name" placeholder="Add New Lists" (keyup.enter)="addFinalyListAction(d.id)"> 
-                </section>
+                </span>
 
                 <ul  class="list-group list-group-flush  singleListItemInerItems">
                   <ng-container *ngFor="let it of d.tasks">

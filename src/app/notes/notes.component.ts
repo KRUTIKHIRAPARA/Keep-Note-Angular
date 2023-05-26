@@ -18,6 +18,9 @@ export class NotesComponent {
   // List Of Item Get Data
   newOneTask:TaskItem;
 
+  // Search Value
+  searchVal: string;
+
   // Edit and Update Button Toogle
   updateAddBtn = false;
 
@@ -27,11 +30,8 @@ export class NotesComponent {
   // Add Inner List Button
   addInnerBtn = false;
 
-  // Search Value
-  searchVal: string;
-
   // New Add Item Part
-  addOneItemBtnToogle = false;
+  addOneItemBtnToogle = true;
 
   constructor(private _toastr: ToastrService, private _jsons: JsonsService) { }
 
@@ -48,17 +48,6 @@ export class NotesComponent {
     this.getAllList();
     this.addBlankItem();
   }
-
-  // jdTodoSend(){
-  //   this._jsons.jdPost(this.getlistArray).subscribe({
-  //     next:(res)=>{
-  //       console.log('Added Data Successfully...');
-  //     },
-  //     error:(err)=>{
-  //       console.log(err);
-  //     }
-  //   });
-  // }
 
   // Add New Row Dynamic
   addBlankItem() {
@@ -94,6 +83,7 @@ export class NotesComponent {
             this.getlistArray = new Tasks;
             this.getAllList();
             this.addBlankItem();
+            this._toastr.success('Todo Add Successfully...');
           },
           error: (err) => {
             console.log(err);
@@ -111,16 +101,15 @@ export class NotesComponent {
 
     this.newOneTask.todoId = id;
 
-    let onData = this.newOneTask;
-
     this.addInnerBtn = false;
 
-    this._jsons.addInnerListData(TodoId,onData).subscribe({
+    this._jsons.addInnerListData(TodoId,this.newOneTask).subscribe({
       next: (res) => {
         this.getlistArray = new Tasks;
         this.newOneTask = new TaskItem;
         this.getlistArray.isInput = false;
         this.getAllList();
+        this._toastr.success('Task Add Successfully...');
       },
       error: (err) => {
         console.log(err);
@@ -158,6 +147,7 @@ export class NotesComponent {
         this.getlistArray = new Tasks;
         this.getAllList();
         this.addBlankItem();
+        this._toastr.success('Todo Edit Successfully...');
       },
       error: (err) => {
         console.log(err);
@@ -174,6 +164,7 @@ export class NotesComponent {
           this.getlistArray = new Tasks;
           this.getAllList();
           this.addBlankItem();
+          this._toastr.success('Task Edit Successfully...');
         },
         error: (err) => {
           console.log(err);
@@ -185,10 +176,9 @@ export class NotesComponent {
   // Delete Data in API
   deleteList(body) {
     this._jsons.deleteListData(body).subscribe(res=>{
-    });
-    setTimeout(()=>{
       this.getAllList();
-    },300)
+      this._toastr.success('Todo Delete Successfully...');
+    });
   }
 
   // Desktop Inner List Task Remove
@@ -196,14 +186,12 @@ export class NotesComponent {
     this._jsons.deleteInnerListData(TodoId,body).subscribe({
       next: (res) => {
         this.getAllList();
+        this._toastr.success('List Delete Successfully...');
       },
       error: (err) => {
         console.log(err);
       },
-    });
-    setTimeout(()=>{
-      this.getAllList();
-    },300)
+    });  
 
   } 
 
