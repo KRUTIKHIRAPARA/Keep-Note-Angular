@@ -81,4 +81,5 @@ describe('NotesComponent', () => {
     component.deleteList(LISTS);
     expect(component.getlistArray.id).toBe(LISTS.id);
   });
+
 });

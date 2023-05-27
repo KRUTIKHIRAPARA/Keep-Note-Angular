@@ -61,6 +61,13 @@ export class NotesComponent {
     }
   }
 
+  // Remove Edit Time Row Dynamic
+  removeEditBlankItem(i) {
+    this.getlistArray.tasks.splice(i, 1);
+
+    this.getlistArray.tasks = new Array<TaskItem>();
+  }
+
   // Get All Datas In API
   getAllList() {
     this._jsons.getListData().subscribe({
@@ -164,7 +171,6 @@ export class NotesComponent {
           this.getlistArray = new Tasks;
           this.getAllList();
           this.addBlankItem();
-          this._toastr.success('Task Edit Successfully...');
         },
         error: (err) => {
           console.log(err);

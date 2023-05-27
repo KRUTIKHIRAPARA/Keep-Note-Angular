@@ -9,8 +9,7 @@
       <!-- Search Part -->
         <input class="form-control me-2 mb-md-0 mb-sm-2 mb-2 searchBox fs-5 ps-md-5" autocomplete="off" [(ngModel)]="searchVal" (keyup)="searchList()"  name="search" type="search" placeholder="Search" aria-label="Search">
     </div>
-  </nav>
-
+</nav>
 
   <!-- Input Part -->
 
@@ -33,9 +32,10 @@
                       <!-- Dynamic Added & Updated Part Start -->
                       <ul *ngFor="let itemAdd of getlistArray.tasks; let i = index;" class="list-group list-group-flush  itemsContainer">
                         <li class="list-group-item d-flex">
-                          <i class="bi bi-x-lg me-2" (click)="removeBlankItem(i)"></i>
+                          <i class="bi bi-x-lg me-2" *ngIf="!updateAddBtn" (click)="removeBlankItem(i);"></i>
+                          <i class="bi bi-x-lg me-2" *ngIf="updateAddBtn" (click)="removeEditBlankItem(i);deleteInnerTask(getlistArray.id,itemAdd)"></i>
                           <input class="form-check-input"  [(ngModel)]="itemAdd.isCompleted" [checked]="itemAdd.isCompleted" type="checkbox" value="" id="flexCheckDefault">
-                          <input type="text"  class=" ps-2 itemAddBtn" name="item" [(ngModel)]="itemAdd.name"  (keyup.enter)="addBlankItem()"  placeholder="List item">  
+                          <input type="text" autocomplete="off"  class=" ps-2 itemAddBtn" name="item" [(ngModel)]="itemAdd.name"  (keyup.enter)="updateAddBtn == false ? addBlankItem(): '' "  placeholder="List item">  
                         </li>             
                       </ul>
                       <!-- Dynamic Added & Updated End -->
@@ -61,8 +61,6 @@
                         </h1>
                       </li>
                       <!-- Edit & Add Data Part End -->
-
-                      <!-- <button (click)="jdTodoSend()">JdAdd</button> -->
 
                     </ul>
                     <li class="list-group-item"></li>

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class JsonsService {
 
-  listAPILink = 'http://10.10.5.124:16100/Todo';
+  listAPILink = 'http://10.10.5.109:16100/Todo';
 
   constructor(private _http: HttpClient) { }
 
@@ -22,7 +22,7 @@ export class JsonsService {
 
   // Edit Add List Of Items
   addInnerListData(TodoId,body) {
-    return this._http.post(`http://10.10.5.124:16100/todo/${TodoId}/task`,body);
+    return this._http.post(`http://10.10.5.109:16100/todo/${TodoId}/task`,body);
   }
 
   // Edit List From API
@@ -32,7 +32,7 @@ export class JsonsService {
 
   // Edit Inner List Of Items
   editInnerListData(TodoId,body) {
-    return this._http.put(`http://10.10.5.124:16100/todo/${TodoId}/task/${body.id}`, body);
+    return this._http.put(`http://10.10.5.109:16100/todo/${TodoId}/task/${body.id}`, body);
   }
 
   // Delele List From API
@@ -42,7 +42,7 @@ export class JsonsService {
 
   // Delele Inner List Of Items
   deleteInnerListData(TodoId,body: Tasks) {
-    return this._http.delete(`http://10.10.5.124:16100/todo/${TodoId}/task/${body.id}`);
+    return this._http.delete(`http://10.10.5.109:16100/todo/${TodoId}/task/${body.id}`);
   }
 
 }
