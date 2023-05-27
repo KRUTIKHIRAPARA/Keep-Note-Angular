@@ -102,15 +102,11 @@ export class NotesComponent {
 
   // Add New Inner List & Add New List Of Items
   addFinalyListAction(id){
-
-    // Add Todo Id In New Add Items
-    let TodoId = id; 
-
     this.newOneTask.todoId = id;
 
     this.addInnerBtn = false;
 
-    this._jsons.addInnerListData(TodoId,this.newOneTask).subscribe({
+    this._jsons.addInnerListData(id,this.newOneTask).subscribe({
       next: (res) => {
         this.getlistArray = new Tasks;
         this.newOneTask = new TaskItem;
