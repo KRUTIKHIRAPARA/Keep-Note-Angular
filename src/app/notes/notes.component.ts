@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { JsonsService, TaskItem, Tasks } from '../service/jsons.service';
+import { JsonsService, Tasks, Todos } from '../service/jsons.service';
 
 @Component({
   selector: 'app-notes',
@@ -9,146 +9,125 @@ import { JsonsService, TaskItem, Tasks } from '../service/jsons.service';
 })
 export class NotesComponent {
 
-  // Data Binding Get Data
-  getlistArray?: Tasks;
+  // Data Binding
+  todoDetails: Todos;
+  singleTaskDetail:Tasks;
 
-  // Store Get All Datas
-  allListArray: Array<Tasks> = new Array<Tasks>();
+  // Store All Todos
+  allTodosArray: Array<Todos> = new Array<Todos>();
 
-  // List Of Item Get Data
-  newOneTask:TaskItem;
-
-  // Search Value
   searchVal: string;
 
-  // Edit and Update Button Toogle
-  updateAddBtn = false;
-
-  // Fill Data But Second Time Button Click Then Not Fill Data
-  fillBtn = true;
-
-  // Add Inner List Button
-  addInnerBtn = false;
-
-  // New Add Item Part
-  addOneItemBtnToogle = true;
+  // Toggle Variable
+  updateAddToggle = false;
+  singleTaskAddToggle = true;
 
   constructor(private _toastr: ToastrService, private _jsons: JsonsService) { }
 
   ngOnInit(): void {
 
-    // Data Binding Define & Initilazation
-    this.getlistArray = new Tasks;
-    this.getlistArray.tasks = new Array<TaskItem>();
+    // Todos Data Binding Initilazation
+    this.todoDetails = new Todos;
+    this.todoDetails.tasks = new Array<Tasks>();
     
-    // New Add List Of Items Define & Initilazation
-    this.newOneTask = new TaskItem;
+    // Single Task Data Binding Initilazation
+    this.singleTaskDetail = new Tasks;
 
     // Methods
-    this.getAllList();
+    this.getAllTodos();
     this.addBlankItem();
   }
 
   // Add New Row Dynamic
   addBlankItem() {
-    this.getlistArray.tasks.push(new TaskItem());
+    this.todoDetails.tasks.push(new Tasks());
   }
 
   // Remove Row Dynamic
   removeBlankItem(i) {
-    if (this.getlistArray.tasks.length != 1) {
-      this.getlistArray.tasks.splice(i, 1);
+    if (this.todoDetails.tasks.length != 1) {
+      this.todoDetails.tasks.splice(i, 1);
     }
   }
 
-  // Remove Edit Time Row Dynamic
-  removeEditBlankItem(i) {
-    this.getlistArray.tasks.splice(i, 1);
-
-    this.getlistArray.tasks = new Array<TaskItem>();
-  }
-
-  // Get All Datas In API
-  getAllList() {
-    this._jsons.getListData().subscribe({
+  // Get All Todos Data
+  getAllTodos() {
+    this._jsons.getTodos().subscribe({
       next: (res) => {
-        this.allListArray = res;
-        console.log(res);
+        this.allTodosArray = res;
       },
       error: (err) => {
-        console.log(err);
+        this._toastr.error(err);
       }
     });
   }
 
-  // Add Datas In API
-  addNewList() {
-    if (this.getlistArray.name) {
-      if (this.getlistArray.tasks.filter(x => x.name)) {
-        this._jsons.addListData(this.getlistArray).subscribe({
+  // Add New Todos Data
+  addTodo() {
+    if (this.todoDetails.name) {
+      if (this.todoDetails.tasks.filter(x => x.name)) {
+        this._jsons.addTodo(this.todoDetails).subscribe({
           next: (res) => {
-            this.getlistArray = new Tasks;
-            this.getAllList();
+            this.todoDetails = new Todos;
+
+            this.getAllTodos();
             this.addBlankItem();
+
             this._toastr.success('Todo Add Successfully...');
           },
           error: (err) => {
-            console.log(err);
+            this._toastr.error(err);
           }
         });
       }
     }
   }
 
-  // Add New Inner List & Add New List Of Items
-  addFinalyListAction(id){
-    this.newOneTask.todoId = id;
+  // Add Single Task Data
+  addSingleTask(id){
+    this.singleTaskDetail.todoId = id;
 
-    this.addInnerBtn = false;
-
-    this._jsons.addInnerListData(id,this.newOneTask).subscribe({
+    this._jsons.addTasks(id,this.singleTaskDetail).subscribe({
       next: (res) => {
-        this.getlistArray = new Tasks;
-        this.newOneTask = new TaskItem;
-        this.getlistArray.isInput = false;
-        this.getAllList();
+        this.todoDetails = new Todos;
+        this.singleTaskDetail = new Tasks;
+        this.todoDetails.isInput = false;
+        this.getAllTodos();
         this._toastr.success('Task Add Successfully...');
       },
       error: (err) => {
-        console.log(err);
+        this._toastr.error(err);
       }
     });
   }
 
-  // Toggle Inner List Of Item Added
-  addOneItem(d:Tasks){
-    if(this.addOneItemBtnToogle)
+  // Single Task Add Time Task Part Toggle
+  addSingleTaskToggleMethod(d:Todos){
+    if(this.singleTaskAddToggle)
     {
       d.isInput = true;
-      this.addOneItemBtnToogle = false;
+      this.singleTaskAddToggle = false;
     }
     else{
       d.isInput = false;
-      this.addOneItemBtnToogle = true;
+      this.singleTaskAddToggle = true;
     }
   }
 
   // Edit Time Fill Data in Edit Fileds
-  fillData(data: Tasks) {
-    this.getlistArray = data;
-      // this.addBlankItem();
-      this.updateAddBtn = true;
-      this.fillBtn = false;
+  fillData(data: Todos) {
+    this.todoDetails = data;
+    this.updateAddToggle = true;
   }
 
   // Edit Datas in API
-  editList() {
-    this._jsons.editListData(this.getlistArray).subscribe({
+  editTodo() {
+    this._jsons.editTodo(this.todoDetails).subscribe({
       next: (res) => {
-        this.editInnerList();
-        this.updateAddBtn = false;
-        this.getlistArray = new Tasks;
-        this.getAllList();
+        this.editTask();
+        this.updateAddToggle = false;
+        this.todoDetails = new Todos;
+        this.getAllTodos();
         this.addBlankItem();
         this._toastr.success('Todo Edit Successfully...');
       },
@@ -159,13 +138,13 @@ export class NotesComponent {
   }
 
   // Edit Inner List Datas
-  editInnerList() {
-    this.getlistArray.tasks.forEach(element => {
-      this._jsons.editInnerListData(this.getlistArray.id,element).subscribe({
+  editTask() {
+    this.todoDetails.tasks.forEach(element => {
+      this._jsons.editTask(this.todoDetails.id,element).subscribe({
         next: (res) => {
-          this.updateAddBtn = false;
-          this.getlistArray = new Tasks;
-          this.getAllList();
+          this.updateAddToggle = false;
+          this.todoDetails = new Todos;
+          this.getAllTodos();
           this.addBlankItem();
         },
         error: (err) => {
@@ -177,17 +156,17 @@ export class NotesComponent {
 
   // Delete Data in API
   deleteList(body) {
-    this._jsons.deleteListData(body).subscribe(res=>{
-      this.getAllList();
+    this._jsons.deleteTodo(body).subscribe(res=>{
+      this.getAllTodos();
       this._toastr.success('Todo Delete Successfully...');
     });
   }
 
   // Desktop Inner List Task Remove
   deleteInnerTask(TodoId,body){
-    this._jsons.deleteInnerListData(TodoId,body).subscribe({
+    this._jsons.deleteTask(TodoId,body).subscribe({
       next: (res) => {
-        this.getAllList();
+        this.getAllTodos();
         this._toastr.success('List Delete Successfully...');
       },
       error: (err) => {
@@ -200,45 +179,41 @@ export class NotesComponent {
   // Search Data in API
   searchList() {
     if (this.searchVal) {
-      let searchEmployee = new Array<Tasks>();
-      if (this.allListArray.length > 0) {
-        for (let emp of this.allListArray) {
-          if (JSON.stringify(emp).toLowerCase().indexOf(this.searchVal.toLowerCase()) > 0) {
-            searchEmployee.push(emp);
+      let tempSearchData = new Array<Todos>();
+      if (this.allTodosArray.length > 0) {
+        for (let todos of this.allTodosArray) {
+          if (JSON.stringify(todos).toLowerCase().indexOf(this.searchVal.toLowerCase()) > 0) {
+            tempSearchData.push(todos);
           }
         }
-        this.allListArray = searchEmployee;
+        this.allTodosArray = tempSearchData;
       }
     }
     else {
-      this.getAllList();
+      this.getAllTodos();
     }
   }
 
   // Cancle Edit Data
   cancelEditList(){
-    this.updateAddBtn = false;
-    this.fillBtn = true;
-    this.getlistArray = new Tasks;
-    this.getAllList();
+    this.updateAddToggle = false;
+    this.todoDetails = new Todos;
+    this.getAllTodos();
     this.addBlankItem();
   }
 
   // Cancle Add List Data
   cancelAddList(){
-    this.getlistArray = new Tasks;
-    this.addInnerBtn = false;
-    this.getAllList();
+    this.todoDetails = new Todos;
+    this.getAllTodos();
     this.addBlankItem();
   }
 
   // Cancle All Data
   cancelAllData(){
-    this.getlistArray = new Tasks;
-    this.updateAddBtn = false;
-    this.addInnerBtn = false;
-    this.fillBtn = true;
-    this.getAllList();
+    this.todoDetails = new Todos;
+    this.updateAddToggle = false;
+    this.getAllTodos();
     this.addBlankItem();
   }
 

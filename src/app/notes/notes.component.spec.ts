@@ -5,6 +5,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { of } from 'rxjs';
+import { JsonsService, Tasks } from '../service/jsons.service';
 
 describe('NotesComponent', () => {
   let component: NotesComponent;
@@ -13,41 +14,45 @@ describe('NotesComponent', () => {
   let mockToastrService;
   let mockJsonService;
 
-  beforeEach(async () => { 
+  beforeEach(async () => {
 
     LISTS = [
       {
-        taskItems: [
+        tasks: [
           {
+            id: 2,
+            todoId: 50,
             isCompleted: false,
-            item: "Create CRUD"
+            name: "Create CRUD"
           },
           {
+            id: 2,
+            todoId: 50,
             isCompleted: true,
-            item: "UI To-do List App"
+            name: "UI To-do List App"
           }
         ],
-        date: "2023-05-16T04:45:50.470Z",
-        taskName: "Work",
+        addedon: "2023-05-16T04:45:50.470Z",
+        name: "Work",
         id: 2
       }
     ];
-    
-    mockJsonService = jasmine.createSpyObj(['getAllList','addNewList','editList','deleteList']);
-    component =  new NotesComponent(mockToastrService,mockJsonService);
+
+    mockJsonService = jasmine.createSpyObj(['getAllList', 'addNewList', 'editList', 'deleteList']);
+    component = new NotesComponent(mockToastrService, mockJsonService);
 
     await TestBed.configureTestingModule({
-      declarations: [ NotesComponent ],
-      imports:[
+      declarations: [NotesComponent],
+      imports: [
         ToastrModule.forRoot(),
         FormsModule,
         HttpClientModule
       ],
-      providers:[
+      providers: [
         HttpClient,
       ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(NotesComponent);
     component = fixture.componentInstance;
@@ -59,27 +64,47 @@ describe('NotesComponent', () => {
   });
 
   // Get Lists
-  it('should get the all lists data',()=>{
+  it('should get the all lists data', () => {
     mockJsonService.getAllList.and.returnValue(of(LISTS));
-    component.getlistArray = LISTS;
+    component.todoDetails = LISTS;
     component.getAllList();
-    expect(component.getlistArray).toBe(LISTS);
+    expect(component.todoDetails).toBe(LISTS);
   });
 
   // Add List
-  it('should add the list',()=>{
+  it('should add the list', () => {
     mockJsonService.addNewList.and.returnValue(of(true));
-    component.getlistArray = LISTS;
+    component.todoDetails = LISTS;
     component.addNewList();
-    expect(component.getlistArray).toBe(LISTS);
+    expect(component.todoDetails).toBe(LISTS);
   });
 
   // Delete List
-  it('should remove the list',()=>{
+  it('should remove the list', () => {
     mockJsonService.deleteList.and.returnValue(of(true));
-    component.getlistArray = LISTS;
+    component.todoDetails = LISTS;
     component.deleteList(LISTS);
-    expect(component.getlistArray.id).toBe(LISTS.id);
+    expect(component.todoDetails.id).toBe(LISTS.id);
   });
+
+  // should be check enter new Todo @input placeholder 
+  it('should be check enter new Todo @input placeholder', () => {
+    fixture.detectChanges(); // 2
+    const compiled = fixture.debugElement.nativeElement; // 2
+    expect(compiled.querySelector('.itemTitle').placeholder).toBe('Title'); // 3
+  });
+
+  // should be check enter new Todo Item @input placeholder 
+  it('should be check enter new Todo Item @input placeholder', () => {
+    const compiled = fixture.debugElement.nativeElement; // 2
+    expect(compiled.querySelector('.newTodoItem').placeholder).toBe('List item'); // 3
+  });
+
+  // should be check search @input placeholder 
+  it('should be check search @input placeholder', () => {
+    const compiled = fixture.debugElement.nativeElement; // 2
+    expect(compiled.querySelector('#search').placeholder).toBe('Search'); // 3
+  });
+
 
 });

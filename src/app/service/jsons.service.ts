@@ -1,63 +1,64 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../environment/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JsonsService {
 
-  listAPILink = 'http://10.10.5.109:16100/Todo';
+  todoAPI = environment.todoAPI;
 
   constructor(private _http: HttpClient) { }
 
-  // Get List From API
-  getListData() {
-    return this._http.get<Array<Tasks>>(this.listAPILink);
+  // Get Todos Data
+  getTodos() {
+    return this._http.get<Array<Todos>>(this.todoAPI);
   }
 
-  // Add List From APIs
-  addListData(body: Tasks) {
-    return this._http.post(this.listAPILink, body);
+  // Add Todo Data
+  addTodo(body: Todos) {
+    return this._http.post(this.todoAPI, body);
   }
 
-  // Edit Add List Of Items
-  addInnerListData(TodoId,body) {
-    return this._http.post(`http://10.10.5.109:16100/todo/${TodoId}/task`,body);
+  // Add Task Dataa
+  addTasks(todoId,body) {
+    return this._http.post(`${this.todoAPI}/${todoId}/task`,body);
   }
 
-  // Edit List From API
-  editListData(body: Tasks) {
-    return this._http.put(`${this.listAPILink}/${body.id}`, body);
+  // Edit Todo Data
+  editTodo(body: Todos) {
+    return this._http.put(`${this.todoAPI}/${body.id}`, body);
   }
 
-  // Edit Inner List Of Items
-  editInnerListData(TodoId,body) {
-    return this._http.put(`http://10.10.5.109:16100/todo/${TodoId}/task/${body.id}`, body);
+  // Edit Task Data
+  editTask(todoId,body) {
+    return this._http.put(`${this.todoAPI}/${todoId}/task/${body.id}`, body);
   }
 
-  // Delele List From API
-  deleteListData(body: Tasks) {
-    return this._http.delete(`${this.listAPILink}/${body.id}`);
+  // Delele Todo Data
+  deleteTodo(body: Todos) {
+    return this._http.delete(`${this.todoAPI}/${body.id}`);
   }
 
-  // Delele Inner List Of Items
-  deleteInnerListData(TodoId,body: Tasks) {
-    return this._http.delete(`http://10.10.5.109:16100/todo/${TodoId}/task/${body.id}`);
+  // Delele Task Data
+  deleteTask(todoId,body: Todos) {
+    return this._http.delete(`${this.todoAPI}/${todoId}/task/${body.id}`);
   }
 
 }
 
-export class Tasks {
+export class Todos {
   id?: number;
   name?: string;
   addedon: Date | any = new Date();
-  tasks?: Array<TaskItem> = new Array<TaskItem>();
+  tasks?: Array<Tasks> = new Array<Tasks>();
   
   // Ui specify
   isInput: boolean = false;
 }
 
-export class TaskItem {
+export class Tasks {
   id: number;
   todoId: number;
   name?: string;

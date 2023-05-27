@@ -7,7 +7,7 @@
         <a class="navbar-brand" href="#"><img src="../../assets/logo.png" class="mb-md-0 mb-sm-2 mb-2" style="width: 150px;"></a>
 
       <!-- Search Part -->
-        <input class="form-control me-2 mb-md-0 mb-sm-2 mb-2 searchBox fs-5 ps-md-5" autocomplete="off" [(ngModel)]="searchVal" (keyup)="searchList()"  name="search" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control me-2 mb-md-0 mb-sm-2 mb-2 searchBox fs-5 ps-md-5" autocomplete="off" [(ngModel)]="searchVal" (keyup)="searchList()"  name="search" id="search" type="search" placeholder="Search" aria-label="Search">
     </div>
 </nav>
 
@@ -22,20 +22,19 @@
               Task A Note ...
           </a>
         </div>
-      <section *ngIf="!addInnerBtn" class="d-flex justify-content-center">
+      <section class="d-flex justify-content-center">
           <div class="collapse taskBody " id="collapseExample">
                 <div class="card card-body">
                   <ul class="list-group list-group-flush">
-                    <li class= "list-group-item "><input type="text" class="form-control mb-1 text-capitalize itemTitle" name="title" id="floatingInput" [(ngModel)]="getlistArray.name" placeholder="Title" ></li>
+                    <li class= "list-group-item "><input type="text" class="form-control mb-1 text-capitalize itemTitle" name="title" id="floatingInput" [(ngModel)]="todoDetails.name" placeholder="Title" ></li>
                     <li class="list-group-item overflow-auto"  style="height: 130px;">
                       
                       <!-- Dynamic Added & Updated Part Start -->
-                      <ul *ngFor="let itemAdd of getlistArray.tasks; let i = index;" class="list-group list-group-flush  itemsContainer">
+                      <ul *ngFor="let itemAdd of todoDetails.tasks; let i = index;" class="list-group list-group-flush  itemsContainer">
                         <li class="list-group-item d-flex">
-                          <i class="bi bi-x-lg me-2" *ngIf="!updateAddBtn" (click)="removeBlankItem(i);"></i>
-                          <i class="bi bi-x-lg me-2" *ngIf="updateAddBtn" (click)="removeEditBlankItem(i);deleteInnerTask(getlistArray.id,itemAdd)"></i>
+                          <i class="bi bi-x-lg me-2" *ngIf="!updateAddToggle" (click)="removeBlankItem(i);"></i>
                           <input class="form-check-input"  [(ngModel)]="itemAdd.isCompleted" [checked]="itemAdd.isCompleted" type="checkbox" value="" id="flexCheckDefault">
-                          <input type="text" autocomplete="off"  class=" ps-2 itemAddBtn" name="item" [(ngModel)]="itemAdd.name"  (keyup.enter)="updateAddBtn == false ? addBlankItem(): '' "  placeholder="List item">  
+                          <input type="text" autocomplete="off"  class=" ps-2 itemAddBtn newTodoItem" name="item" [(ngModel)]="itemAdd.name"  (keyup.enter)="updateAddToggle == false ? addBlankItem(): '' "  placeholder="List item">  
                         </li>             
                       </ul>
                       <!-- Dynamic Added & Updated End -->
@@ -44,19 +43,19 @@
                     <ul class="d-flex justify-content-between">
 
                       <!-- Edit & Add Data Part Start -->
-                      <li class="list-group" (click)="updateAddBtn == false ? addNewList() : editList() ">
+                      <li class="list-group" (click)="updateAddToggle == false ? addTodo() : editTodo() ">
                         <h1>
 
                           <!-- Add Button -->
-                          <i *ngIf="!updateAddBtn" data-bs-toggle="collapse" href="#collapseExample" class="bi bi-file-earmark-plus-fill text-info"></i>
+                          <i *ngIf="!updateAddToggle" data-bs-toggle="collapse" href="#collapseExample" class="bi bi-file-earmark-plus-fill text-info"></i>
 
                           <!-- Edit Button -->
-                          <i *ngIf="updateAddBtn" data-bs-toggle="collapse" href="#collapseExample" class="bi bi-pencil-square text-success me-2"></i>
+                          <i *ngIf="updateAddToggle" data-bs-toggle="collapse" href="#collapseExample" class="bi bi-pencil-square text-success me-2"></i>
 
                           <!-- Cancel Button -->
-                          <i *ngIf="updateAddBtn" data-bs-toggle="collapse" href="#collapseExample" (click)="cancelEditList()" class="bi bi-x-circle text-danger"></i>
+                          <i *ngIf="updateAddToggle" data-bs-toggle="collapse" href="#collapseExample" (click)="cancelEditList()" class="bi bi-x-circle text-danger"></i>
 
-                          <i *ngIf="!updateAddBtn" data-bs-toggle="collapse" href="#collapseExample" (click)="cancelAllData()" class="bi bi-x-circle text-danger"></i>
+                          <i *ngIf="!updateAddToggle" data-bs-toggle="collapse" href="#collapseExample" (click)="cancelAllData()" class="bi bi-x-circle text-danger"></i>
 
                         </h1>
                       </li>
@@ -82,7 +81,7 @@
       <div class="row d-flex justify-content-around">
 
         <!-- All Data & List Show Part Start -->
-        <ng-container *ngFor="let d of allListArray;let i =index">
+        <ng-container *ngFor="let d of allTodosArray;let i =index">
           <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
             <div class="card mb-3 singleListPart ">
               <div class="card-header d-flex justify-content-between align-items-center singleListHeaderPart">
@@ -95,11 +94,11 @@
               <div class="card-body text-dark">
 
                 <!-- Add New Task Items-->
-                <i class="bi bi-plus-lg text-primary me-2"  (click)="addOneItem(d)"></i>
+                <i class="bi bi-plus-lg text-primary me-2"  (click)="addSingleTaskToggleMethod(d)"></i>
 
                 <span *ngIf="d.isInput">
-                  <input type="checkbox" class="me-2" name="chk{{i}}" [(ngModel)]="newOneTask.isCompleted">
-                  <input class="addTaslInnerList" name="list{{i}}" [(ngModel)]="newOneTask.name" placeholder="Add New Lists" (keyup.enter)="addFinalyListAction(d.id)"> 
+                  <input type="checkbox" class="me-2" name="chk{{i}}" [(ngModel)]="singleTaskDetail.isCompleted">
+                  <input class="addTaslInnerList listOne" name="list{{i}}" [(ngModel)]="singleTaskDetail.name" placeholder="Add New Lists" (keyup.enter)="addSingleTask(d.id)"> 
                 </span>
 
                 <ul  class="list-group list-group-flush  singleListItemInerItems">
