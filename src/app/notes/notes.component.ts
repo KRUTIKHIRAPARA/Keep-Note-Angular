@@ -120,7 +120,7 @@ export class NotesComponent {
     this.updateAddToggle = true;
   }
 
-  // Edit Datas in API
+  // Edit Todo Datas 
   editTodo() {
     this._jsons.editTodo(this.todoDetails).subscribe({
       next: (res) => {
@@ -132,15 +132,15 @@ export class NotesComponent {
         this._toastr.success('Todo Edit Successfully...');
       },
       error: (err) => {
-        console.log(err);
+        this._toastr.error(err);
       }
     });
   }
 
-  // Edit Inner List Datas
+  // Edit Task Datas
   editTask() {
-    this.todoDetails.tasks.forEach(element => {
-      this._jsons.editTask(this.todoDetails.id,element).subscribe({
+    this.todoDetails.tasks.forEach(task => {
+      this._jsons.editTask(this.todoDetails.id,task).subscribe({
         next: (res) => {
           this.updateAddToggle = false;
           this.todoDetails = new Todos;
@@ -148,29 +148,34 @@ export class NotesComponent {
           this.addBlankItem();
         },
         error: (err) => {
-          console.log(err);
+          this._toastr.error(err);
         }
       });
     });
   }
 
-  // Delete Data in API
-  deleteList(body) {
-    this._jsons.deleteTodo(body).subscribe(res=>{
-      this.getAllTodos();
-      this._toastr.success('Todo Delete Successfully...');
+  // Delete Todo Datas
+  deleteTodo(todo) {
+    this._jsons.deleteTodo(todo).subscribe({
+      next:(res)=>{
+        this.getAllTodos();
+        this._toastr.success('Todo Delete Successfully...');
+      },
+      error:(err)=>{
+        this._toastr.error(err);
+      }
     });
   }
 
-  // Desktop Inner List Task Remove
-  deleteInnerTask(TodoId,body){
-    this._jsons.deleteTask(TodoId,body).subscribe({
+  // Delete Task Datas
+  deleteTask(todoId,task){
+    this._jsons.deleteTask(todoId,task).subscribe({
       next: (res) => {
         this.getAllTodos();
-        this._toastr.success('List Delete Successfully...');
+        this._toastr.success('Task Delete Successfully...');
       },
       error: (err) => {
-        console.log(err);
+        this._toastr.error(err);
       },
     });  
 
@@ -195,22 +200,15 @@ export class NotesComponent {
   }
 
   // Cancle Edit Data
-  cancelEditList(){
+  cancelEditTodo(){
     this.updateAddToggle = false;
     this.todoDetails = new Todos;
     this.getAllTodos();
     this.addBlankItem();
   }
 
-  // Cancle Add List Data
-  cancelAddList(){
-    this.todoDetails = new Todos;
-    this.getAllTodos();
-    this.addBlankItem();
-  }
-
-  // Cancle All Data
-  cancelAllData(){
+  // Cancle Edit All Data
+  cancelEditAllData(){
     this.todoDetails = new Todos;
     this.updateAddToggle = false;
     this.getAllTodos();
