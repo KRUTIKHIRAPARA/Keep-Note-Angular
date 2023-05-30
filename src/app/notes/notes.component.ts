@@ -19,7 +19,6 @@ export class NotesComponent {
 
   searchVal: string;
 
-  
   // Toggle Variable
   updateAddToggle = false;
   singleTaskEditBtnToggle = false;
