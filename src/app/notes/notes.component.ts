@@ -62,7 +62,7 @@ export class NotesComponent {
         this.allTodosArray = res;
       },
       error: (err) => {
-        this._crud.loaderHide();
+        this._crud.loaderShow();
         this._toastr.error(err);
       },
       complete:()=>{
@@ -86,7 +86,7 @@ export class NotesComponent {
             this._toastr.success('Todo Add Successfully...');
           },
           error: (err) => {
-            this._crud.loaderHide();
+            this._crud.loaderShow();
             this._toastr.error(err);
           },
           complete:()=>{
@@ -116,7 +116,7 @@ export class NotesComponent {
         this._toastr.success('Task Add Successfully...');
       },
       error: (err) => {
-        this._crud.loaderHide();
+        this._crud.loaderShow();
         this._toastr.error(err);
       },
       complete:()=>{
@@ -166,7 +166,7 @@ export class NotesComponent {
         this._toastr.success('Todo Edit Successfully...');
       },
       error: (err) => {
-        this._crud.loaderHide();
+        this._crud.loaderShow();
         this._toastr.error(err);
       },
       complete:()=>{
@@ -187,7 +187,7 @@ export class NotesComponent {
           this.addBlankItem();
         },
         error: (err) => {
-          this._crud.loaderHide();
+          this._crud.loaderShow();
           this._toastr.error(err);
         },
         complete:()=>{
@@ -223,7 +223,7 @@ export class NotesComponent {
         this.addBlankItem();
       },
       error: (err) => {
-        this._crud.loaderHide();
+        this._crud.loaderShow();
         this._toastr.error(err);
       },
       complete:()=>{
@@ -246,7 +246,7 @@ export class NotesComponent {
         this._toastr.success('Todo Delete Successfully...');
       },
       error: (err) => {
-        this._crud.loaderHide();
+        this._crud.loaderShow();
         this._toastr.error(err);
       },
       complete:()=>{
@@ -270,7 +270,7 @@ export class NotesComponent {
         this._toastr.success('Task Delete Successfully...');
       },
       error: (err) => {
-        this._crud.loaderHide();
+        this._crud.loaderShow();
         this._toastr.error(err);
       },
       complete:()=>{
