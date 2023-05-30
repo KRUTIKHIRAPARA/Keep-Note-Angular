@@ -5,6 +5,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { of } from 'rxjs';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 describe('NotesComponent', () => {
   let component: NotesComponent;
@@ -45,7 +46,8 @@ describe('NotesComponent', () => {
       imports: [
         ToastrModule.forRoot(),
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatProgressBarModule
       ],
       providers: [
         HttpClient,

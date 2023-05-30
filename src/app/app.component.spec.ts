@@ -5,6 +5,7 @@ import { NotesComponent } from './notes/notes.component';
 import { ToastrModule } from 'ngx-toastr';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -12,7 +13,8 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         ToastrModule.forRoot(),
-        HttpClientModule
+        HttpClientModule,
+        MatProgressBarModule
       ],
       declarations: [
         AppComponent,
