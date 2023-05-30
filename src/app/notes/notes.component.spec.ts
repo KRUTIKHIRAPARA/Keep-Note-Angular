@@ -80,21 +80,21 @@ describe('NotesComponent', () => {
 
   // should be check enter new Todo @input placeholder 
   it('should be check enter new Todo @input placeholder', () => {
-    fixture.detectChanges(); // 2
-    const compiled = fixture.debugElement.nativeElement; // 2
-    expect(compiled.querySelector('.itemTitle').placeholder).toBe('Title'); // 3
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.itemTitle').placeholder).toBe('Title');
   });
 
   // should be check enter new Todo Item @input placeholder 
   it('should be check enter new Todo Item @input placeholder', () => {
-    const compiled = fixture.debugElement.nativeElement; // 2
-    expect(compiled.querySelector('.newTodoItem').placeholder).toBe('List item'); // 3
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.newTodoItem').placeholder).toBe('List item');
   });
 
   // should be check search @input placeholder 
   it('should be check search @input placeholder', () => {
-    const compiled = fixture.debugElement.nativeElement; // 2
-    expect(compiled.querySelector('#search').placeholder).toBe('Search'); // 3
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('#search').placeholder).toBe('Search');
   });
 
 
