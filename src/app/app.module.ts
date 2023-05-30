@@ -9,6 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NotesComponent } from './notes/notes.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

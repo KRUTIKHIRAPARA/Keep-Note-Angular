@@ -1,5 +1,13 @@
-<!-- Header -->
+<!-- Progress Bar -->
+<!-- <mat-progress-bar *ngIf="isLoading | async" mode="indeterminate"></mat-progress-bar> -->
 
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-bar mode="indeterminate" class="spinner" color="accent"></mat-progress-bar>
+</div>
+
+
+
+<!-- Header -->
 <nav class="navbar navbar-expand navbar-light">
   <div class="container flex-lg-row flex-md-row flex-sm-column flex-column">
 
@@ -112,12 +120,15 @@
               <span *ngIf="todo.isInput">
                 <input type="checkbox" class="me-2" name="chk{{i}}" [(ngModel)]="singleTaskDetail.isCompleted">
                 <input class="addTaslInnerList listOne" name="list{{i}}" [(ngModel)]="singleTaskDetail.name"
-                  placeholder="Add New Lists" (keyup.enter)="addSingleTask(todo.id)">
+                  placeholder="Add New Lists" *ngIf="!singleTaskEditBtnToggle" (keyup.enter)="addSingleTask(todo.id)">
+                <input class="addTaslInnerList listOne" name="list{{i}}" [(ngModel)]="singleTaskDetail.name"
+                  placeholder="Add New Lists" *ngIf="singleTaskEditBtnToggle" (keyup.enter)="editSingleTask(todo.id)">
               </span>
 
               <ul class="list-group list-group-flush  singleListItemInerItems">
                 <ng-container *ngFor="let task of todo.tasks">
                   <li class="list-group-item d-flex">
+                    <i (click)="fillEditTask(todo,task)" class="bi bi-pencil text-success me-2"></i>
                     <i (click)="deleteTask(todo.id,task)" class="bi bi-trash3-fill text-danger me-2"></i>
                     <input type="checkbox" disabled [checked]="task.isCompleted" class="me-2 singleListItemCheck">
                     <span class="singleListItem"><del *ngIf="task.isCompleted"> {{ task.name }} </del> <span

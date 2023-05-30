@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environment/config';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,21 @@ export class CrudService {
 
   todoAPI = environment.todoAPI;
 
+  isLoading = new BehaviorSubject<boolean>(false);
+
   constructor(private _http: HttpClient) { }
+
+  // Loader Show
+  loaderShow() {
+    // document.body.style.pointerEvents='none';
+    this.isLoading.next(true);
+  }
+  
+  // Loader Hide
+  loaderHide() {
+    // document.body.style.pointerEvents='';
+    this.isLoading.next(false);
+  }
 
   // Get Todos Data
   getTodos() {
