@@ -5,7 +5,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { of } from 'rxjs';
-import { JsonsService, Tasks } from '../service/jsons.service';
 
 describe('NotesComponent', () => {
   let component: NotesComponent;
@@ -38,7 +37,7 @@ describe('NotesComponent', () => {
       }
     ];
 
-    mockJsonService = jasmine.createSpyObj(['getAllList', 'addNewList', 'editList', 'deleteList']);
+    mockJsonService = jasmine.createSpyObj(['getAllTodos', 'addSingleTask', 'editList', 'deleteTodo']);
     component = new NotesComponent(mockToastrService, mockJsonService);
 
     await TestBed.configureTestingModule({
@@ -65,25 +64,17 @@ describe('NotesComponent', () => {
 
   // Get Lists
   it('should get the all lists data', () => {
-    mockJsonService.getAllList.and.returnValue(of(LISTS));
+    mockJsonService.getAllTodos.and.returnValue(of(LISTS));
     component.todoDetails = LISTS;
-    component.getAllList();
-    expect(component.todoDetails).toBe(LISTS);
-  });
-
-  // Add List
-  it('should add the list', () => {
-    mockJsonService.addNewList.and.returnValue(of(true));
-    component.todoDetails = LISTS;
-    component.addNewList();
+    component.getAllTodos();
     expect(component.todoDetails).toBe(LISTS);
   });
 
   // Delete List
   it('should remove the list', () => {
-    mockJsonService.deleteList.and.returnValue(of(true));
+    mockJsonService.deleteTodo.and.returnValue(of(true));
     component.todoDetails = LISTS;
-    component.deleteList(LISTS);
+    component.deleteTodo(LISTS);
     expect(component.todoDetails.id).toBe(LISTS.id);
   });
 

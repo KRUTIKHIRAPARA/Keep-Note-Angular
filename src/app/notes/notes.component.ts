@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { JsonsService, Tasks, Todos } from '../service/jsons.service';
+import { CrudService, Tasks, Todos } from '../service/crud.service';
 
 @Component({
   selector: 'app-notes',
@@ -11,7 +11,7 @@ export class NotesComponent {
 
   // Data Binding
   todoDetails: Todos;
-  singleTaskDetail:Tasks;
+  singleTaskDetail: Tasks;
 
   // Store All Todos
   allTodosArray: Array<Todos> = new Array<Todos>();
@@ -22,14 +22,14 @@ export class NotesComponent {
   updateAddToggle = false;
   singleTaskAddToggle = true;
 
-  constructor(private _toastr: ToastrService, private _jsons: JsonsService) { }
+  constructor(private _toastr: ToastrService, private _crud: CrudService) { }
 
   ngOnInit(): void {
 
     // Todos Data Binding Initilazation
     this.todoDetails = new Todos;
     this.todoDetails.tasks = new Array<Tasks>();
-    
+
     // Single Task Data Binding Initilazation
     this.singleTaskDetail = new Tasks;
 
@@ -38,12 +38,12 @@ export class NotesComponent {
     this.addBlankItem();
   }
 
-  // Add New Row Dynamic
+  // Add Dynamic Task Row 
   addBlankItem() {
     this.todoDetails.tasks.push(new Tasks());
   }
 
-  // Remove Row Dynamic
+  // Remove Dynamic Task Row 
   removeBlankItem(i) {
     if (this.todoDetails.tasks.length != 1) {
       this.todoDetails.tasks.splice(i, 1);
@@ -52,7 +52,7 @@ export class NotesComponent {
 
   // Get All Todos Data
   getAllTodos() {
-    this._jsons.getTodos().subscribe({
+    this._crud.getTodos().subscribe({
       next: (res) => {
         this.allTodosArray = res;
       },
@@ -65,8 +65,8 @@ export class NotesComponent {
   // Add New Todos Data
   addTodo() {
     if (this.todoDetails.name) {
-      if (this.todoDetails.tasks.filter(x => x.name)) {
-        this._jsons.addTodo(this.todoDetails).subscribe({
+      if (this.todoDetails.tasks.filter(task => task.name)) {
+        this._crud.addTodo(this.todoDetails).subscribe({
           next: (res) => {
             this.todoDetails = new Todos;
 
@@ -83,11 +83,16 @@ export class NotesComponent {
     }
   }
 
-  // Add Single Task Data
-  addSingleTask(id){
-    this.singleTaskDetail.todoId = id;
+  /**
+   * This Mehtod is used to add single task
+   * @param todoId 
+   */
 
-    this._jsons.addTasks(id,this.singleTaskDetail).subscribe({
+  // Add Single Task Data
+  addSingleTask(todoId) {
+    this.singleTaskDetail.todoId = todoId;
+
+    this._crud.addTasks(todoId, this.singleTaskDetail).subscribe({
       next: (res) => {
         this.todoDetails = new Todos;
         this.singleTaskDetail = new Tasks;
@@ -101,18 +106,27 @@ export class NotesComponent {
     });
   }
 
+  /** 
+   * This metnod is used to task add time task part toggle
+   * @param todo
+   */
+
   // Single Task Add Time Task Part Toggle
-  addSingleTaskToggleMethod(d:Todos){
-    if(this.singleTaskAddToggle)
-    {
-      d.isInput = true;
+  addSingleTaskToggleMethod(todo: Todos) {
+    if (this.singleTaskAddToggle) {
+      todo.isInput = true;
       this.singleTaskAddToggle = false;
     }
-    else{
-      d.isInput = false;
+    else {
+      todo.isInput = false;
       this.singleTaskAddToggle = true;
     }
   }
+
+  /**
+   * This method is used to fill todo fields in edit time
+   * @param data 
+   */
 
   // Edit Time Fill Data in Edit Fileds
   fillData(data: Todos) {
@@ -122,7 +136,7 @@ export class NotesComponent {
 
   // Edit Todo Datas 
   editTodo() {
-    this._jsons.editTodo(this.todoDetails).subscribe({
+    this._crud.editTodo(this.todoDetails).subscribe({
       next: (res) => {
         this.editTask();
         this.updateAddToggle = false;
@@ -140,7 +154,7 @@ export class NotesComponent {
   // Edit Task Datas
   editTask() {
     this.todoDetails.tasks.forEach(task => {
-      this._jsons.editTask(this.todoDetails.id,task).subscribe({
+      this._crud.editTask(this.todoDetails.id, task).subscribe({
         next: (res) => {
           this.updateAddToggle = false;
           this.todoDetails = new Todos;
@@ -154,22 +168,33 @@ export class NotesComponent {
     });
   }
 
+  /**
+   * This method is used to delete todo
+   * @param todo 
+   */
+
   // Delete Todo Datas
   deleteTodo(todo) {
-    this._jsons.deleteTodo(todo).subscribe({
-      next:(res)=>{
+    this._crud.deleteTodo(todo).subscribe({
+      next: (res) => {
         this.getAllTodos();
         this._toastr.success('Todo Delete Successfully...');
       },
-      error:(err)=>{
+      error: (err) => {
         this._toastr.error(err);
       }
     });
   }
 
+  /**
+   * This method is used to delete task 
+   * @param todoId 
+   * @param task 
+   */
+
   // Delete Task Datas
-  deleteTask(todoId,task){
-    this._jsons.deleteTask(todoId,task).subscribe({
+  deleteTask(todoId, task) {
+    this._crud.deleteTask(todoId, task).subscribe({
       next: (res) => {
         this.getAllTodos();
         this._toastr.success('Task Delete Successfully...');
@@ -177,12 +202,12 @@ export class NotesComponent {
       error: (err) => {
         this._toastr.error(err);
       },
-    });  
+    });
 
-  } 
+  }
 
   // Search Data in API
-  searchList() {
+  searchTodo() {
     if (this.searchVal) {
       let tempSearchData = new Array<Todos>();
       if (this.allTodosArray.length > 0) {
@@ -200,7 +225,7 @@ export class NotesComponent {
   }
 
   // Cancle Edit Data
-  cancelEditTodo(){
+  cancelEditTodo() {
     this.updateAddToggle = false;
     this.todoDetails = new Todos;
     this.getAllTodos();
@@ -208,7 +233,7 @@ export class NotesComponent {
   }
 
   // Cancle Edit All Data
-  cancelEditAllData(){
+  cancelEditAllData() {
     this.todoDetails = new Todos;
     this.updateAddToggle = false;
     this.getAllTodos();
