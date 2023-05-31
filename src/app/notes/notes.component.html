@@ -7,30 +7,27 @@
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>My App</span>
+  <span>Keep Notes</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
-  </button>
+  <input class="form-control me-2 mb-md-0 mb-sm-2 mb-2 searchBox fs-5 ps-md-5" autocomplete="off"
+      [(ngModel)]="searchVal" (keyup)="searchTodo()" name="search" id="search" type="search" placeholder="Search"
+      aria-label="Search">
 </mat-toolbar>
 
 <!-- Header -->
-<nav class="navbar navbar-expand navbar-light">
+<!-- <nav class="navbar navbar-expand navbar-light">
   <div class="container flex-lg-row flex-md-row flex-sm-column flex-column">
 
-    <!-- Logo -->
+
     <a class="navbar-brand" href="#"><img src="../../assets/logo.png" class="mb-md-0 mb-sm-2 mb-2"
         style="width: 150px;"></a>
 
-    <!-- Search Part -->
+
     <input class="form-control me-2 mb-md-0 mb-sm-2 mb-2 searchBox fs-5 ps-md-5" autocomplete="off"
       [(ngModel)]="searchVal" (keyup)="searchTodo()" name="search" id="search" type="search" placeholder="Search"
       aria-label="Search">
   </div>
-</nav>
+</nav> -->
 
 <!-- Input Part -->
 

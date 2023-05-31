@@ -6,7 +6,7 @@
 
   
 .searchBox{
-    width: 30%;
+    width: 15%;
     border: none;
     outline: none;
     color: #ABABAB;
@@ -140,6 +140,10 @@
     flex: 1 1 auto;
   }
 
+  .example-form-field {
+    width: 200px;
+  }
+
 
 @media screen and (max-width:1400px) {
     .taskUpperHeader, .taskBody{
@@ -218,5 +222,11 @@
 
     .itemAddBtn{
         font-size: 16px;
+    }
+}
+
+@media screen and (max-width:320px) {
+    .searchBox{
+        width: 35% !important;
     }
 }

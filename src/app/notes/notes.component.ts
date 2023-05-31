@@ -23,6 +23,8 @@ export class NotesComponent {
   isTodoEdit = false;
   isSingleTaskEdit = false;
 
+  value = 'Clear me';
+
   constructor(private _toastr: ToastrService, private _crud: CrudService) { }
   // isLoader:boolean = false;
 
