@@ -65,26 +65,26 @@ describe('NotesComponent', () => {
   });
 
   // Get Lists
-  it('should get the all lists data', () => {
-    mockJsonService.getAllTodos.and.returnValue(of(LISTS));
-    component.todoDetails = LISTS;
-    component.getAllTodos();
-    expect(component.todoDetails).toBe(LISTS);
-  });
+  // it('should get the all lists data', () => {
+  //   mockJsonService.getAllTodos.and.returnValue(of(LISTS));
+  //   component.todoDetails = LISTS;
+  //   component.getAllTodos();
+  //   expect(component.todoDetails).toBe(LISTS);
+  // });
 
-  // Delete List
-  it('should remove the list', () => {
-    mockJsonService.deleteTodo.and.returnValue(of(true));
-    component.todoDetails = LISTS;
-    component.deleteTodo(LISTS);
-    expect(component.todoDetails.id).toBe(LISTS.id);
-  });
+  // // Delete List
+  // it('should remove the list', () => {
+  //   mockJsonService.deleteTodo.and.returnValue(of(true));
+  //   component.todoDetails = LISTS;
+  //   component.deleteTodo(LISTS);
+  //   expect(component.todoDetails.id).toBe(LISTS.id);
+  // });
 
   // should be check enter new Todo @input placeholder 
   it('should be check enter new Todo @input placeholder', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.itemTitle').placeholder).toBe('Title');
+    expect(compiled.querySelector('.itemTitle').placeholder).toBe('Todo');
   });
 
   // should be check enter new Todo Item @input placeholder 

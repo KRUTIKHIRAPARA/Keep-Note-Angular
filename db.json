@@ -1,113 +1,85 @@
 {
   "keepNotes": [
     {
-      "taskItems": [
+      "tasks": [
         {
           "isCompleted": false,
-          "item": "Cloths"
-        },
-        {
-          "isCompleted": true,
-          "item": "Mobileasasas"
+          "name": "Cloths gh fgh fgh  gfh fgh  fgh fh f gh fgh fg hghghghghghgh ghgh ghg hg hghgh",
+          "todoId": 3,
+          "id": 1
         },
         {
           "isCompleted": false,
-          "item": "Laptop"
+          "name": "Cloths",
+          "todoId": 3,
+          "id": 2
+        },
+        {
+          "isCompleted": false,
+          "name": "Cloths",
+          "todoId": 3,
+          "id": 3
+        },
+        {
+          "isCompleted": false,
+          "name": "Cloths",
+          "todoId": 3,
+          "id": 4
         }
       ],
-      "date": "2023-05-16T04:45:50.470Z",
-      "taskName": "Shoping",
-      "id": 1
-    },
-    {
-      "taskItems": [
-        {
-          "isCompleted": false,
-          "item": "Create CRUD"
-        },
-        {
-          "isCompleted": true,
-          "item": "UI To-do List App"
-        }
-      ],
-      "date": "2023-05-16T04:45:50.470Z",
-      "taskName": "Work",
-      "id": 2
-    },
-    {
-      "taskItems": [
-        {
-          "isCompleted": false,
-          "item": "Call brother's at 9'0 clock"
-        },
-        {
-          "isCompleted": true,
-          "item": "Call Guruji"
-        }
-      ],
-      "date": "2023-05-16T04:45:50.470Z",
-      "taskName": "Personal",
+      "addedon": "2023-05-16T04:45:50.470Z",
+      "name": "Shoping",
       "id": 3
     },
     {
-      "taskItems": [
+      "tasks": [
         {
           "isCompleted": false,
-          "item": "mobile"
+          "name": "Cloths",
+          "todoId": 4,
+          "id": 1
         },
         {
           "isCompleted": false,
-          "item": "leptop"
+          "name": "Cloths",
+          "todoId": 4,
+          "id": 2
         },
         {
-          "isCompleted": false
-        },
-        {
-          "isCompleted": true,
-          "item": "j j"
+          "isCompleted": false,
+          "name": "Cloths",
+          "todoId": 4,
+          "id": 3
         }
       ],
-      "date": "2023-05-16T04:45:50.470Z",
-      "taskName": "Rutvik",
+      "addedon": "2023-05-16T04:45:50.470Z",
+      "name": "Shoping",
       "id": 4
     },
     {
-      "date": "2023-05-17T04:45:50.470Z",
-      "taskItems": [
+      "tasks": [
         {
           "isCompleted": false,
-          "item": "Remove Error"
+          "name": "Cloths",
+          "todoId": 5,
+          "id": 1
         },
         {
           "isCompleted": false,
-          "item": "Write Test Case"
-        },
-        {
-          "isCompleted": true,
-          "item": "Service File Test Case"
+          "name": "Cloths",
+          "todoId": 5,
+          "id": 2
         },
         {
           "isCompleted": false,
-          "item": "Learn angular material"
+          "name": "Cloths",
+          "todoId": 5,
+          "id": 3
         }
       ],
-      "taskName": "Today",
+      "addedon": "2023-05-16T04:45:50.470Z",
+      "name": "Shoping",
       "id": 5
-    },
-    {
-      "date": "2023-05-22T06:10:49.485Z",
-      "taskItems": [
-        {
-          "isCompleted": false,
-          "item": "song"
-        },
-        {
-          "isCompleted": false,
-          "item": "video"
-        }
-      ],
-      "taskName": "Play",
-      "id": 6
     }
   ]
 }

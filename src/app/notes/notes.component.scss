@@ -66,7 +66,7 @@
     }
 
     .singleListItemInerItems{
-        height: 130px;
+        height: 200px;
         overflow: auto;
     }
 
@@ -144,6 +144,45 @@
     width: 200px;
   }
 
+  .taskEdit{
+    color: #289128;
+  }
+
+  .taskDelete{
+    color: #f44336;
+  }
+
+  .taskInput{
+    border: none;
+    outline: none;
+    // width: 8vw;
+    width: auto;
+  }
+
+  .taskReturn{
+    color: #f44336;
+  }
+
+  .taskSave{
+    color:rgb(82, 172, 208);
+  }
+
+  .singleListItemDate{
+    color:#ABABAB ;
+    font-family: 'Castoro Titling', cursive;
+    font-family: 'IBM Plex Serif', serif;
+    font-family: 'K2D', sans-serif;
+    border: none;
+}
+
+.show-action-btn{
+    display: none!important;
+}
+
+.list-item:hover .show-action-btn{
+    display: inline!important;
+}
+
 
 @media screen and (max-width:1400px) {
     .taskUpperHeader, .taskBody{
@@ -187,6 +226,10 @@
     .itemAddBtn{
         font-size: 20px;
     }
+
+    .taskInput{
+        // width: 160px;
+    }
 }
 
 @media screen and (max-width:768px) {
@@ -223,10 +266,24 @@
     .itemAddBtn{
         font-size: 16px;
     }
+
+    .taskInput{
+        // width: 260px;
+    }
+}
+
+@media screen and (max-width:375px) {
+    .taskInput{
+        // width: 20px;
+    }
 }
 
 @media screen and (max-width:320px) {
     .searchBox{
         width: 35% !important;
+    }
+
+    .taskInput{
+        // width: 160px;
     }
 }

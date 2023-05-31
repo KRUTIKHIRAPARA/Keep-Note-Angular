@@ -66,7 +66,7 @@ export class CrudService {
 export class Todos {
   id: number;
   name: string;
-  addedon: Date = new Date();
+  addedOn: Date = new Date();
   tasks: Array<Tasks> = new Array<Tasks>();
 
   // Ui specify
@@ -78,4 +78,7 @@ export class Tasks {
   todoId: number;
   name: string;
   isCompleted: boolean;
+
+  // Ui specify
+  isTaskInput: boolean;
 }

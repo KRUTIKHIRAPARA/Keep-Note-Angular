@@ -12,7 +12,8 @@ export class NotesComponent {
 
   // Data Bind
   todo: Todos;
-  task: Tasks;
+  Task: Tasks;
+  editTasks: Tasks;
 
   // Store All Todos
   allTodos: Array<Todos> = new Array<Todos>();
@@ -22,8 +23,7 @@ export class NotesComponent {
   // Toggle Variable
   isTodoEdit = false;
   isSingleTaskEdit = false;
-
-  value = 'Clear me';
+  isTaskEdit = true;
 
   constructor(private _toastr: ToastrService, private _crud: CrudService) { }
   // isLoader:boolean = false;
@@ -37,7 +37,8 @@ export class NotesComponent {
     this.todo.tasks = new Array<Tasks>();
 
     // Single Task Data Binding Initilazation
-    this.task = new Tasks;
+    this.Task = new Tasks;
+    this.editTasks = new Tasks;
 
     // Methods
     this.fetchAllTodos();
@@ -45,13 +46,14 @@ export class NotesComponent {
 
   // Get All Todos Data
   fetchAllTodos() {
-    this._crud.loaderShow();
+    // this._crud.loaderShow();
     this._crud.getTodos().subscribe({
       next: (res) => {
         this.allTodos = res;
+        console.log(res);
       },
       error: (err) => {
-        this._crud.loaderShow();
+        // this._crud.loaderShow();
         this._toastr.error(err);
       },
       complete: () => {
@@ -92,13 +94,13 @@ export class NotesComponent {
 
   // Add Single Task Data
   addSingleTask(todoId) {
-    this.task.todoId = todoId;
+    this.Task.todoId = todoId;
 
     this._crud.loaderShow();
-    this._crud.addTasks(todoId, this.task).subscribe({
+    this._crud.addTasks(todoId, this.Task).subscribe({
       next: (res) => {
         this.todo = new Todos;
-        this.task = new Tasks;
+        this.Task = new Tasks;
         this.todo.isInput = false;
         this.fetchAllTodos();
         this._toastr.success('Task Add Successfully...');
@@ -121,11 +123,11 @@ export class NotesComponent {
   // Single Task Add Time Task Part Toggle
   addSingleTaskToggleMethod(todo: Todos) {
     if (!todo.isInput) {
-      this.task = new Tasks;
+      this.Task = new Tasks;
       todo.isInput = true;
     }
     else {
-      this.task = new Tasks;
+      this.Task = new Tasks;
       todo.isInput = false;
     }
   }
@@ -162,27 +164,34 @@ export class NotesComponent {
   }
 
   // Edit Task
-  editTask(todo, task) {
-    this.task = task;
-    if (!todo.isInput) {
-      todo.isInput = true;
-      this.isSingleTaskEdit = true;
+  editTask(task) {
+    this.editTasks = task;
+    if (task.isTaskInput) {
+      task.isTaskInput = false;
+      this.isTaskEdit = true;
+      console.log(task);
     }
     else {
-      todo.isInput = false;
-      this.isSingleTaskEdit = false;
+      task.isTaskInput = true;
+      this.isTaskEdit = false;
     }
+  }
+  
+  returnEditTask(task){
+    task.isTaskInput = false;
+    this.isTaskEdit = true;
   }
 
   // Update Task
   updateTask(todoId) {
+    console.log(this.Task);
     this._crud.loaderShow();
-    this._crud.editTask(todoId, this.task).subscribe({
+    this._crud.editTask(todoId, this.Task).subscribe({
       next: (res) => {
         this.isTodoEdit = false;
         this.isSingleTaskEdit = false;
         this.todo = new Todos;
-        this.task = new Tasks;
+        this.Task = new Tasks;
         this.fetchAllTodos();
       },
       error: (err) => {
