@@ -3,7 +3,7 @@
     {
       "tasks": [
         {
-          "isCompleted": false,
+          "isCompleted": true,
           "name": "Cloths gh fgh fgh  gfh fgh  fgh fh f gh fgh fg hghghghghghgh ghgh ghg hg hghgh",
           "todoId": 3,
           "id": 1
@@ -15,7 +15,7 @@
           "id": 2
         },
         {
-          "isCompleted": false,
+          "isCompleted": true,
           "name": "Cloths",
           "todoId": 3,
           "id": 3

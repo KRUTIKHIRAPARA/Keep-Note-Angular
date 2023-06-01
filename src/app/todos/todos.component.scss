@@ -155,8 +155,6 @@
   .taskInput{
     border: none;
     outline: none;
-    // width: 8vw;
-    width: auto;
   }
 
   .taskReturn{
@@ -227,9 +225,6 @@
         font-size: 20px;
     }
 
-    .taskInput{
-        // width: 160px;
-    }
 }
 
 @media screen and (max-width:768px) {
@@ -267,23 +262,14 @@
         font-size: 16px;
     }
 
-    .taskInput{
-        // width: 260px;
-    }
 }
 
 @media screen and (max-width:375px) {
-    .taskInput{
-        // width: 20px;
-    }
+
 }
 
 @media screen and (max-width:320px) {
     .searchBox{
         width: 35% !important;
-    }
-
-    .taskInput{
-        // width: 160px;
     }
 }

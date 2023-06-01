@@ -1,21 +1,21 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CrudService } from './crud.service';
+import { TodoService } from './todo.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
-describe('CrudService', () => {
-  let service: CrudService;
+describe('TodoService', () => {
+  let service: TodoService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports:[
+      imports: [
         HttpClientModule
       ],
-      providers:[
+      providers: [
         HttpClient,
       ]
     });
-    service = TestBed.inject(CrudService);
+    service = TestBed.inject(TodoService);
   });
 
   it('should be created', () => {

@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ToastrModule } from 'ngx-toastr';
-import { NotesComponent } from './notes/notes.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -18,11 +17,12 @@ import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
+import { TodosComponent } from './todos/todos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotesComponent
+    TodosComponent
   ],
   imports: [
     BrowserModule,

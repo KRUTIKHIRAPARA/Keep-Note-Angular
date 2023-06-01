@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environment/config';
+import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CrudService {
+export class TodoService {
 
   todoAPI = environment.todoAPI;
 
