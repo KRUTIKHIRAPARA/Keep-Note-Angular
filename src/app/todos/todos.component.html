@@ -104,13 +104,13 @@
                 <div>
                   <!-- Add Task Start-->
   
-                  <button mat-icon-button (click)="addSingleTaskToggleMethod(todo)">
+                  <button mat-icon-button (click)="toggleAddTask(todo)">
                     <mat-icon>add</mat-icon>
                   </button>
                   <span *ngIf="todo.isInput">
                     <!-- <input type="checkbox" class="me-2" name="chk{{i}}" [(ngModel)]="Task.isCompleted"> -->
                     <input class="addTaslInnerList listOne" name="list{{i}}" [(ngModel)]="Task.name"
-                      placeholder="Add New Lists" *ngIf="!isSingleTaskEdit" >
+                      placeholder="Add New Lists" >
                     <i class="material-icons" (click)="addSingleTask(todo.id)">save</i>
                   </span>
                   <mat-divider></mat-divider>

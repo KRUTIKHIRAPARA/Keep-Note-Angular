@@ -120,7 +120,7 @@ addSingleTask(todoId) {
  */
 
 // Single Task Add Time Task Part Toggle
-addSingleTaskToggleMethod(todo: Todos) {
+toggleAddTask(todo: Todos) {
   if (!todo.isInput) {
     this.Task = new Tasks;
     todo.isInput = true;
@@ -210,7 +210,6 @@ isTaskCompleted(todoId,task){
   this._crud.editTask(todoId, task).subscribe({
     next: (res) => {
       this.isTodoEdit = false;
-      this.isSingleTaskEdit = false;
       this.Todo = new Todos;
       this.Task = new Tasks;
       this.fetchAllTodos();
