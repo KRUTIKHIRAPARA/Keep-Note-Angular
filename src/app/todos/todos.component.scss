@@ -21,6 +21,13 @@
     }
 }
 
+.todo-add-inner-header2{
+    font-size: 20px;
+        color: #ABABAB;
+        font-family: 'Inter';
+        letter-spacing: 2px;
+}
+
 .todo-add-inner-header {
     width: 40%;
 }
@@ -143,30 +150,50 @@
     align-items: center;
 }
 
+.mat-mdc-form-field + .mat-mdc-form-field {
+    margin-left: 8px;
+  }
+
 
 //-------------------  for Media Qurey css  -------------------
 
-@media screen and (max-width:1400px) {
+@media screen and (max-width:1440px) {
 
     .todo-add-inner-header,
     .todo-body {
         width: 50% !important;
     }
+    .add-todo-container{
+        width: 30% !important;
+    }
 }
 
 @media screen and (max-width:1200px) {
-
+    .add-todo-container{
+        width: 40% !important;
+    }
     .todo-add-inner-header,
     .todo-body {
         width: 60% !important;
     }
 }
 
+
 @media screen and (max-width:768px) {
 
     .todo-add-inner-header,
     .todo-body {
         width: 95% !important;
+    }
+
+    .add-todo-container{
+        width: 50% !important;
+    }
+}
+
+@media screen and (max-width:425px) {
+    .add-todo-container{
+        width: 100% !important;
     }
 }
 
@@ -175,5 +202,17 @@
     .todo-add-inner-header,
     .todo-body {
         width: 90% !important;
+    }
+}
+
+@media screen and (max-width:375px) {
+    .add-todo-container{
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width:320px) {
+    .add-todo-container{
+        width: 100% !important;
     }
 }

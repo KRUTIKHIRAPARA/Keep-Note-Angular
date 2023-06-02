@@ -22,6 +22,9 @@ export class TodosComponent {
 
   searchVal: string;
 
+  // Add Todo panel
+  ispanelOpen = false;
+
   constructor(private _toastr: ToastrService, private _crud: TodoService) { }
 
   // isLoader:boolean = false;
