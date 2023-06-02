@@ -10,58 +10,49 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span>Keep Notes</span>
-    <span class="example-spacer"></span>
-    <!-- <input class="form-control me-2 mb-md-0 mb-sm-2 mb-2 searchBox fs-5 ps-md-5" autocomplete="off"
-        [(ngModel)]="searchVal" (keyup)="searchTodo()" name="search" id="search" type="search" placeholder="Search"
-        aria-label="Search"> -->
-    <input class="form-control me-2 w-25 search" type="search" placeholder="Search" aria-label="Search" autocomplete="off"
+    <span class="header-spacer"></span>
+    <input class="form-control w-25 search" type="search" placeholder="Search" aria-label="Search" autocomplete="off"
       [(ngModel)]="searchVal" (keyup)="searchTodo()">
   </mat-toolbar>
   
   <!-- Input Part -->
-  
   <div class="container mb-5">
     <div class="row">
       <div class="col-12">
-        <div class="d-flex justify-content-center taskAddBtnHeader">
-          <a class="form-control taskUpperHeader" (click)="cancelUpdates()" data-bs-toggle="collapse"
+        <div class="d-flex justify-content-center todo-add-header">
+          <a class="form-control todo-add-inner-header" (click)="cancelUpdates()" data-bs-toggle="collapse"
             href="#collapseExample" aria-controls="collapseExample" style="text-decoration: none;">
             Add A Todo ...
           </a>
         </div>
         <section class="d-flex justify-content-center">
-          <div class="collapse taskBody " id="collapseExample">
+          <div class="collapse todo-body " id="collapseExample">
             <div class="card card-body">
               <ul class="list-group list-group-flush">
-                <li class="list-group-item "><input type="text" class="form-control mb-1 text-capitalize itemTitle"
-                    name="title" id="floatingInput" [(ngModel)]="Todo.name" placeholder="Todo"></li>
+                <li class="list-group-item w-100">
+                    <mat-form-field appearance="outline" class="todo-input">
+                      <mat-label>Todo</mat-label>
+                      <input matInput [(ngModel)]="Todo.name" placeholder="Enter Todo">
+                    </mat-form-field>
+                </li>
                 <ul class="d-flex justify-content-between">
   
                   <!-- Edit & Add Data Part Start -->
-                  <li class="list-group" (click)="isTodoEdit == false ? addTodo() : updateTodo() ">
+                  <li class="list-group" (click)="addTodo()">
                     <h1>
   
                       <!-- Add Button -->
-                      <i *ngIf="!isTodoEdit" data-bs-toggle="collapse" href="#collapseExample"
-                        class="bi bi-file-earmark-plus-fill text-info"></i>
-  
-                      <!-- Edit Button -->
-                      <i *ngIf="isTodoEdit" data-bs-toggle="collapse" href="#collapseExample"
-                        class="bi bi-pencil-square text-success me-2"></i>
+                      <i data-bs-toggle="collapse" href="#collapseExample"
+                        class="bi bi-file-earmark-plus-fill text-info me-2" style="font-size: 30px;"></i>
   
                       <!-- Cancel Button -->
-                      <i *ngIf="isTodoEdit" data-bs-toggle="collapse" href="#collapseExample" (click)="cancelUpdates()"
-                        class="bi bi-x-circle text-danger"></i>
-  
-                      <i *ngIf="!isTodoEdit" data-bs-toggle="collapse" href="#collapseExample" (click)="cancelUpdates()"
-                        class="bi bi-x-circle text-danger"></i>
-  
+                      <i data-bs-toggle="collapse" href="#collapseExample" (click)="cancelUpdates()"
+                        class="bi bi-x-circle text-danger" style="font-size: 30px;"></i>
                     </h1>
                   </li>
                   <!-- Edit & Add Data Part End -->
   
                 </ul>
-                <li class="list-group-item"></li>
               </ul>
             </div>
           </div>
@@ -83,14 +74,25 @@
           <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
             <mat-card>
               <mat-card-header class="d-flex justify-content-between align-items-center">
-                <mat-card-title>{{ todo.name }}</mat-card-title>
+                <mat-card-title>
+                  <span *ngIf="!todo.isEditInput">{{ todo.name }}</span>
+                  <div *ngIf="todo.isEditInput" class="d-flex">
+                    <input type="text"  [(ngModel)]="editTodos.name" >
+                    
+                    <button mat-icon-button color="primary" (click)="updateTodo(todo)">
+                      <mat-icon>save</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="cancelUpdates()">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </div>
+                </mat-card-title>
   
-                <button mat-icon-button [matMenuTriggerFor]="menu">
+                <button mat-icon-button  [matMenuTriggerFor]="menu">
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu" xPosition="before">
-                  <button mat-icon-button color="primary" (click)="editTodo(todo)" data-bs-toggle="collapse"
-                    href="#collapseExample">
+                  <button mat-icon-button color="primary" (click)="editTodo(todo)">
                     <mat-icon>edit</mat-icon>
                   </button>
                   <button mat-icon-button color="warn" (click)="deleteTodo(todo)">
@@ -111,7 +113,8 @@
                     <!-- <input type="checkbox" class="me-2" name="chk{{i}}" [(ngModel)]="Task.isCompleted"> -->
                     <input class="addTaslInnerList listOne" name="list{{i}}" [(ngModel)]="Task.name"
                       placeholder="Add New Lists" >
-                    <i class="material-icons" (click)="addSingleTask(todo.id)">save</i>
+                      
+                    <i class="material-icons" style="color: rgb(54, 131, 189);" (click)="addSingleTask(todo.id)">save</i>
                   </span>
                   <mat-divider></mat-divider>
   

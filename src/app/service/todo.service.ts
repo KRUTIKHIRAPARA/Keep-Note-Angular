@@ -71,6 +71,7 @@ export class Todos {
 
   // Ui specify
   isInput: boolean = false;
+  isEditInput: boolean = false;
 }
 
 export class Tasks {

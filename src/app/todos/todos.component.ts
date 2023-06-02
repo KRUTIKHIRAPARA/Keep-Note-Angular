@@ -12,6 +12,7 @@ export class TodosComponent {
   
 // Data Bind
 Todo: Todos;
+editTodos: Todos;
 Task: Tasks;
 editTasks: Tasks;
 
@@ -21,7 +22,6 @@ allTodos: Array<Todos> = new Array<Todos>();
 searchVal: string;
 
 // Toggle Variable
-isTodoEdit = false;
 isSingleTaskEdit = false;
 isTaskEdit = true;
 
@@ -34,6 +34,7 @@ ngOnInit(): void {
 
   // Todos Data Binding Initilazation
   this.Todo = new Todos;
+  this.editTodos = new Todos;
   this.Todo.tasks = new Array<Tasks>();
 
   // Single Task Data Binding Initilazation
@@ -121,13 +122,16 @@ addSingleTask(todoId) {
 
 // Single Task Add Time Task Part Toggle
 toggleAddTask(todo: Todos) {
-  if (!todo.isInput) {
+  this.allTodos.forEach((todo)=>{
+    todo.isInput = false;
+  })
+  if (todo.isInput) {
     this.Task = new Tasks;
-    todo.isInput = true;
+    todo.isInput = false;
   }
   else {
     this.Task = new Tasks;
-    todo.isInput = false;
+    todo.isInput = true;
   }
 }
 
@@ -137,18 +141,27 @@ toggleAddTask(todo: Todos) {
  */
 
 // Edit Todo Datas
-editTodo(data: Todos) {
-  this.Todo = data;
-  this.isTodoEdit = true;
+editTodo(todo: Todos) {
+  this.allTodos.forEach((todo)=>{
+    todo.isInput = false;
+    todo.isEditInput =false;
+    todo.tasks.forEach((task)=>{
+      task.isTaskInput = false;
+    })
+  })
+
+  this.editTodos = todo;
+  todo.isEditInput = true;
 }
 
 // Update Todo Datas 
-updateTodo() {
+updateTodo(todo) {
+  // console.log(this.editTodos);
   this._crud.loaderShow();
-  this._crud.editTodo(this.Todo).subscribe({
+  this._crud.editTodo(this.editTodos).subscribe({
     next: (res) => {
-      this.isTodoEdit = false;
-      this.Todo = new Todos;
+      todo.isEditInput = false;
+      this.editTodos = new Todos;
       this.fetchAllTodos();
       this._toastr.success('Todo Edit Successfully...');
     },
@@ -164,11 +177,18 @@ updateTodo() {
 
 // Edit Task
 editTask(task) {
+  this.allTodos.forEach((todo)=>{
+    todo.isInput = false;
+    todo.isEditInput =false;
+    todo.tasks.forEach((task)=>{
+      task.isTaskInput = false;
+    })
+  })
+
   this.editTasks = task;
   if (task.isTaskInput) {
     task.isTaskInput = false;
     this.isTaskEdit = true;
-    console.log(task);
   }
   else {
     task.isTaskInput = true;
@@ -189,7 +209,6 @@ updateTask(todoId) {
   this._crud.loaderShow();
   this._crud.editTask(todoId, this.editTasks).subscribe({
     next: (res) => {
-      this.isTodoEdit = false;
       this.isSingleTaskEdit = false;
       this.Todo = new Todos;
       this.Task = new Tasks;
@@ -209,7 +228,6 @@ isTaskCompleted(todoId,task){
   this._crud.loaderShow();
   this._crud.editTask(todoId, task).subscribe({
     next: (res) => {
-      this.isTodoEdit = false;
       this.Todo = new Todos;
       this.Task = new Tasks;
       this.fetchAllTodos();
@@ -292,9 +310,11 @@ searchTodo() {
 
 // Cancle Update Data
 cancelUpdates() {
-  this.isTodoEdit = false;
   this.Todo = new Todos;
+  this.editTasks = new Tasks;
+  this.editTodos = new Todos;
   this.fetchAllTodos();
 }
+
 
 }

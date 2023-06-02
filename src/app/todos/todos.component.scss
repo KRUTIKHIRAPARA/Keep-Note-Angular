@@ -2,33 +2,14 @@
 
 ::-webkit-scrollbar {
     width: 0px;
-  }
-
-  
-.searchBox{
-    width: 15%;
-    border: none;
-    outline: none;
-    color: #ABABAB;
-    font-family: 'inter';
-    border-radius: 10px;
-    // box-shadow: 1px 1px 2px rgb(153, 153, 153);
-
-    -webkit-box-shadow: inset 0px 0px 5px 0px rgba(161,161,161,1);
-    -moz-box-shadow: inset 0px 0px 5px 0px rgba(161,161,161,1);
-    box-shadow: inset 0px 0px 5px 0px rgba(161,161,161,1);
 }
 
-.checkedBtn{
-    width: 4px !important;
-}
-
-.taskAddBtnHeader{
+.todo-add-header {
     height: 50px;
     display: flex;
     align-items: center;
-    
-    a{
+
+    a {
         font-size: 20px;
         color: #ABABAB;
         font-family: 'Inter';
@@ -36,80 +17,15 @@
     }
 }
 
-.taskUpperHeader{
+.todo-add-inner-header {
     width: 40%;
 }
 
-.taskBody{
+.todo-body {
     width: 40%;
 }
 
-.itemAddBtn{
-    width: 100%;
-    border: none;
-    outline: none;
-}
-
-.singleListPart{
-    border-radius: 5px;
-
-    -webkit-box-shadow: inset 0px 0px 5px 0px rgb(0, 0, 0);
-    -moz-box-shadow: inset 0px 0px 5px 0px rgba(161,161,161,1);
-    box-shadow: inset 0px 0px 5px 0px rgba(161,161,161,1);
-
-    .singleListHeader{
-        font-family: 'Lato';
-        font-weight: 100;
-        font-size: 23px;
-        letter-spacing: 1px;
-        color: #222121;
-    }
-
-    .singleListItemInerItems{
-        height: 200px;
-        overflow: auto;
-    }
-
-    .singleListHeaderPart{
-        border-radius: 25px 0px 0px 0px;
-    }
-
-    .editBtn{
-        color:green;
-        &:hover{
-            color: rgb(4, 213, 35);
-        }
-    }
-
-    .deleteBtn{
-        color:red;
-        &:hover{
-            color: rgb(225, 4, 4);
-        }
-    }
-
-
-    .singleListItemCheck{
-        color: #696767;
-    }
-
-    .singleListItem{
-        font-family: 'Laila';
-        font-weight: 100;
-        letter-spacing: 1px;
-        color: #696767;
-    }
-
-    .singleListItemDate{
-        color:#ABABAB ;
-        font-family: 'Castoro Titling', cursive;
-        font-family: 'IBM Plex Serif', serif;
-        font-family: 'K2D', sans-serif;
-        border: none;
-    }
-}
-
-.addTaslInnerList{
+.addTaslInnerList {
     outline: none;
     border: none;
     border-bottom: 1px solid rgb(82, 82, 82);
@@ -126,150 +42,159 @@
     left: 0;
     background-color: rgba(255, 255, 255, 0.8);
     z-index: 99999;
-  }
-  
-  .spinner {
+}
+
+.spinner {
     position: absolute;
     top: 0;
     display: block;
     width: 100%;
     z-index: 99999;
-  }
+}
 
-  .example-spacer {
+
+.header-spacer {
     flex: 1 1 auto;
-  }
+}
 
-  .example-form-field {
-    width: 200px;
-  }
-
-  .taskEdit{
+.taskEdit {
     color: #289128;
-  }
+}
 
-  .taskDelete{
+.taskDelete {
     color: #f44336;
-  }
+}
 
-  .taskInput{
+.taskInput {
     border: none;
     outline: none;
-  }
+}
 
-  .taskReturn{
+.taskReturn {
     color: #f44336;
-  }
+}
 
-  .taskSave{
-    color:rgb(82, 172, 208);
-  }
+.taskSave {
+    color: rgb(82, 172, 208);
+}
 
-  .singleListItemDate{
-    color:#ABABAB ;
+.singleListItemDate {
+    color: #ABABAB;
     font-family: 'Castoro Titling', cursive;
     font-family: 'IBM Plex Serif', serif;
     font-family: 'K2D', sans-serif;
     border: none;
 }
 
-.show-action-btn{
-    display: none!important;
+.todo-input {
+    width: 100%;
 }
 
-.list-item:hover .show-action-btn{
-    display: inline!important;
+.show-action-btn {
+    display: none !important;
 }
 
+.list-item:hover .show-action-btn {
+    display: inline !important;
+}
+
+
+//-------------------   Media Qurey Css  -------------------
 
 @media screen and (max-width:1400px) {
-    .taskUpperHeader, .taskBody{
+
+    .todo-add-inner-header,
+    .todo-body {
         width: 50% !important;
     }
 
-    .searchBox{
+    .searchBox {
         width: 35% !important;
     }
 
-    .itemsContainer{
+    .itemsContainer {
         height: 150px;
     }
 
-    .itemTitle{
+    .itemTitle {
         font-size: 25px;
     }
 
-    .itemAddBtn{
+    .itemAddBtn {
         font-size: 22px;
     }
 }
 
 @media screen and (max-width:1200px) {
-    .taskUpperHeader, .taskBody{
+
+    .todo-add-inner-header,
+    .todo-body {
         width: 60% !important;
     }
 
-    .searchBox{
+    .searchBox {
         width: 35% !important;
     }
 
-    .itemsContainer{
+    .itemsContainer {
         height: 150px;
     }
 
-    .itemTitle{
+    .itemTitle {
         font-size: 23px;
     }
 
-    .itemAddBtn{
+    .itemAddBtn {
         font-size: 20px;
     }
 
 }
 
 @media screen and (max-width:768px) {
-    .taskUpperHeader, .taskBody{
+
+    .todo-add-inner-header,
+    .todo-body {
         width: 95% !important;
     }
 
-    .searchBox{
+    .searchBox {
         width: 70% !important;
     }
 
-    .itemTitle{
+    .itemTitle {
         font-size: 21px;
     }
 
-    .itemAddBtn{
+    .itemAddBtn {
         font-size: 18px;
     }
 }
 
 @media screen and (max-width:662px) {
-    .taskUpperHeader, .taskBody{
+
+    .todo-add-inner-header,
+    .todo-body {
         width: 90% !important;
     }
 
-    .searchBox{
+    .searchBox {
         width: 80% !important;
     }
 
-    .itemTitle{
+    .itemTitle {
         font-size: 19px;
     }
 
-    .itemAddBtn{
+    .itemAddBtn {
         font-size: 16px;
     }
 
 }
 
-@media screen and (max-width:375px) {
-
-}
+@media screen and (max-width:375px) {}
 
 @media screen and (max-width:320px) {
-    .searchBox{
+    .searchBox {
         width: 35% !important;
     }
 }
