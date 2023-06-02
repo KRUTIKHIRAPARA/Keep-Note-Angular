@@ -85,6 +85,7 @@
                   <button mat-icon-button color="warn" (click)="cancelUpdates()">
                     <mat-icon>cancel</mat-icon>
                   </button>
+                  
                 </div>
               </mat-card-title>
 
@@ -99,7 +100,6 @@
                   <mat-icon>delete</mat-icon>
                 </button>
               </mat-menu>
-
 
             </mat-card-header>
             <mat-card-header>
@@ -135,18 +135,18 @@
                         <input type="checkbox" class="me-2" [(ngModel)]="task.isCompleted"
                           (change)="isTaskCompleted(todo.id,task)">
                         <input type="text" class="taskInput" [value]="task.name" *ngIf="!task.isTaskInput"
-                          [disabled]="!task.isTaskInput" style="width: -webkit-fill-available;">
+                          [disabled]="!task.isTaskInput" style="width: -webkit-fill-available; background-color: white;">
                         <input type="text" class="taskInput" *ngIf="task.isTaskInput" [(ngModel)]="editTasks.name">
 
                       </div>
                     </div>
                     <div class="col-3">
                       <div class=" show-action-btn">
-                        <i class="material-icons taskReturn " *ngIf="!isTaskEdit"
+                        <i class="material-icons taskReturn " *ngIf="task.isTaskInput"
                           (click)="returnEditTask(task)">reply</i>
-                        <i class="material-icons taskSave" *ngIf="!isTaskEdit" (click)="updateTask(todo.id)">save</i>
-                        <i class="material-icons taskEdit " *ngIf="isTaskEdit" (click)="editTask(task)">edit</i>
-                        <i class="material-icons taskDelete" *ngIf="isTaskEdit"
+                        <i class="material-icons taskSave" *ngIf="task.isTaskInput" (click)="updateTask(todo.id)">save</i>
+                        <i class="material-icons taskEdit " *ngIf="!task.isTaskInput" (click)="editTask(task)">edit</i>
+                        <i class="material-icons taskDelete" *ngIf="!task.isTaskInput"
                           (click)="deleteTask(todo.id,task)">delete</i>
                       </div>
                     </div>

@@ -6,25 +6,25 @@
         {
           "id": 1,
           "todoId": 1,
-          "name": "Task -1 ",
+          "name": "Car ",
           "isCompleted": true
         },
         {
           "id": 2,
           "todoId": 1,
-          "name": "Task -1 ",
+          "name": "Mobile ",
           "isCompleted": false
         },
         {
           "id": 3,
           "todoId": 1,
-          "name": "Task -1 ",
+          "name": "Laptop ",
           "isCompleted": true
         }
       ],
       "isInput": false,
       "isEditInput": false,
-      "name": "asdasasd",
+      "name": "Shoping",
       "id": 1
     },
     {
@@ -33,25 +33,25 @@
         {
           "id": 1,
           "todoId": 2,
-          "name": "Task -1 ",
+          "name": "Research New Project ",
           "isCompleted": false
         },
         {
           "id": 2,
           "todoId": 2,
-          "name": "Task -1 ",
+          "name": "Complete DSA ",
           "isCompleted": true
         },
         {
           "id": 3,
           "todoId": 2,
-          "name": "Task -1 ",
+          "name": "Create Website ",
           "isCompleted": true
         }
       ],
       "isInput": false,
       "isEditInput": false,
-      "name": "fghg",
+      "name": "Work",
       "id": 2
     },
     {
@@ -60,34 +60,26 @@
         {
           "id": 1,
           "todoId": 3,
-          "name": "Task -1 ",
+          "name": "Dhruv -1 ",
           "isCompleted": false
         },
         {
           "id": 2,
           "todoId": 3,
-          "name": "Task -1 ",
+          "name": "Ankit -2 ",
           "isCompleted": true
         },
         {
           "id": 3,
           "todoId": 3,
-          "name": "Task -1 ",
+          "name": "Dhaval -3 ",
           "isCompleted": false
         }
       ],
       "isInput": false,
       "isEditInput": false,
-      "name": "ggggg",
+      "name": "Person",
       "id": 3
-    },
-    {
-      "addedOn": "2023-06-02T08:24:52.890Z",
-      "tasks": [],
-      "isInput": false,
-      "isEditInput": false,
-      "name": "hj hgjgh",
-      "id": 4
     }
   ]
 }

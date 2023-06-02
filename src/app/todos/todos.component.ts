@@ -18,12 +18,12 @@ export class TodosComponent {
 
   // Store All Todos
   allTodos: Array<Todos> = new Array<Todos>();
+  copyAllTodos: Array<Todos> = new Array<Todos>();
 
   searchVal: string;
 
   // Toggle Variable
   isSingleTaskEdit = false;
-  isTaskEdit = true;
 
   constructor(private _toastr: ToastrService, private _crud: TodoService) { }
 
@@ -51,6 +51,7 @@ export class TodosComponent {
     this._crud.getTodos().subscribe({
       next: (res) => {
         this.allTodos = res;
+        this.copyAllTodos = res;
       },
       error: (err) => {
         this._crud.loaderShow();
@@ -189,17 +190,16 @@ export class TodosComponent {
     this.editTasks = task;
     if (task.isTaskInput) {
       task.isTaskInput = false;
-      this.isTaskEdit = true;
     }
     else {
       task.isTaskInput = true;
-      this.isTaskEdit = false;
     }
   }
 
   returnEditTask(task) {
+    this.editTasks =  new Tasks;
     task.isTaskInput = false;
-    this.isTaskEdit = true;
+    this.allTodos = this.copyAllTodos;
   }
 
   // Update Task
@@ -303,9 +303,12 @@ export class TodosComponent {
         }
         this.allTodos = tempSearchData;
       }
+      else{
+        this.allTodos = this.copyAllTodos;
+      }
     }
     else {
-      this.fetchAllTodos();
+      this.allTodos = this.copyAllTodos;
     }
   }
 
@@ -314,7 +317,18 @@ export class TodosComponent {
     this.Todo = new Todos;
     this.editTasks = new Tasks;
     this.editTodos = new Todos;
-    this.fetchAllTodos();
+
+    this.allTodos.forEach((todo)=>{
+      todo.isInput = false;
+      todo.isEditInput = false;
+
+      todo.tasks.forEach((task)=>{
+        task.isTaskInput = false;
+      });
+
+    });
+
+    this.allTodos = this.copyAllTodos;
   }
 
   cancelTodo() {
