@@ -38,16 +38,20 @@
               <ul class="d-flex justify-content-between">
 
                 <!-- Edit & Add Data Part Start -->
-                <li class="list-group" (click)="addTodo()">
+                <li class="list-group">
                   <h1>
 
                     <!-- Add Button -->
-                    <i data-bs-toggle="collapse" href="#collapseExample"
-                      class="bi bi-file-earmark-plus-fill text-info me-2" style="font-size: 30px;"></i>
+                    <button mat-icon-button (click)="addTodo()" data-bs-toggle="collapse" href="#collapseExample"
+                      class="text-info me-2" style="font-size: 30px;">
+                      <mat-icon>addsave</mat-icon>
+                    </button>
 
                     <!-- Cancel Button -->
-                    <i data-bs-toggle="collapse" href="#collapseExample" (click)="cancelUpdates()"
-                      class="bi bi-x-circle text-danger" style="font-size: 30px;"></i>
+                    <button mat-icon-button (click)="cancelUpdates()" data-bs-toggle="collapse" href="#collapseExample"
+                      class="text-danger" style="font-size: 30px;">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
                   </h1>
                 </li>
                 <!-- Edit & Add Data Part End -->
@@ -73,53 +77,59 @@
       <ng-container *ngFor="let todo of allTodos;let i =index">
         <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
           <mat-card>
-            <mat-card-header class="d-flex justify-content-between align-items-center todo-header">
+            <mat-card-header class="d-flex justify-content-between align-items-center todo-header"
+              style="padding: 0 10px; ">
               <mat-card-title>
                 <span *ngIf="!todo.isEditInput" class="todo-name text-capitalize">{{ todo.name }}</span>
                 <div *ngIf="todo.isEditInput" class="d-flex">
                   <input type="text" [(ngModel)]="editTodos.name">
 
-                  <button mat-icon-button color="primary" (click)="updateTodo(todo)">
+                  <button mat-icon-button color="primary" (click)="updateTodo(todo)" matTooltip="Save New Todo" matTooltipPosition="above">
                     <mat-icon>save</mat-icon>
                   </button>
-                  <button mat-icon-button color="warn" (click)="cancelUpdates()">
+                  <button mat-icon-button color="warn" (click)="cancelUpdates()" matTooltip="Cancel New Todo" matTooltipPosition="above">
                     <mat-icon>cancel</mat-icon>
                   </button>
-                  
+
                 </div>
               </mat-card-title>
 
-              <button mat-icon-button [matMenuTriggerFor]="menu">
+              <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Edit & Delete Todo" matTooltipPosition="above">
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-icon-button color="primary" (click)="editTodo(todo)">
+                <button mat-icon-button color="primary" (click)="editTodo(todo)" matTooltip="Edit Todo Name" matTooltipPosition="above">
                   <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button color="warn" (click)="deleteTodo(todo)">
+                <button mat-icon-button color="warn" (click)="deleteTodo(todo)" matTooltip="Delete Todo" matTooltipPosition="above">
                   <mat-icon>delete</mat-icon>
                 </button>
               </mat-menu>
 
             </mat-card-header>
-            <mat-card-header>
+            <mat-card-header style="padding: 0;">
               <div>
-                <!-- Add Task Start-->
 
-                <button mat-icon-button (click)="toggleAddTask(todo)">
-                  <mat-icon>add</mat-icon>
-                </button>
-                <span *ngIf="todo.isInput">
-                  <!-- <input type="checkbox" class="me-2" name="chk{{i}}" [(ngModel)]="Task.isCompleted"> -->
-                  <input class="addTaslInnerList listOne" name="list{{i}}" [(ngModel)]="Task.name"
-                    placeholder="Add New Lists">
-
-                  <i class="material-icons" style="color: rgb(54, 131, 189);" (click)="addSingleTask(todo.id)">save</i>
-                </span>
-                <mat-divider></mat-divider>
-
-                <!-- Add Task End-->
-              </div>
+                <div class="d-flex mt-2">
+                  <!-- Add Task Start-->
+                  
+                  <button mat-icon-button (click)="toggleAddTask(todo)" matTooltip="Add New Task" matTooltipPosition="above">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                  
+                  <mat-form-field *ngIf="todo.isInput" appearance="outline" class="task-input"
+                  style="width: 100%; ">
+                  <input matInput [(ngModel)]="Task.name" class="task-input text-capitalize" placeholder="Enter Task">
+                </mat-form-field>
+                
+                <button mat-icon-button *ngIf="todo.isInput" (click)="addSingleTask(todo.id)"
+                style="color: rgb(54, 131, 189);" matTooltip="Save Add Task" matTooltipPosition="above">
+                <mat-icon>save</mat-icon>
+              </button>
+              <!-- Add Task End-->
+            </div>
+            <!-- <mat-divider></mat-divider> -->
+          </div>
 
             </mat-card-header>
             <mat-card-content style="height: 200px; overflow: scroll;">
@@ -128,26 +138,31 @@
               <!-- All Task Show Start -->
               <mat-list role="list" *ngFor="let task of todo.tasks">
                 <mat-list-item role="listitem" class="list-item">
-                  <div class="row">
+                  <div class="row d-flex">
                     <div class="col-9">
                       <div class="d-inline d-flex singleTask">
 
                         <input type="checkbox" class="me-2" [(ngModel)]="task.isCompleted"
                           (change)="isTaskCompleted(todo.id,task)">
                         <input type="text" class="taskInput" [value]="task.name" *ngIf="!task.isTaskInput"
-                          [disabled]="!task.isTaskInput" style="width: -webkit-fill-available; background-color: white;">
+                          [disabled]="!task.isTaskInput"
+                          style="width: -webkit-fill-available; background-color: white;">
                         <input type="text" class="taskInput" *ngIf="task.isTaskInput" [(ngModel)]="editTasks.name">
 
                       </div>
                     </div>
                     <div class="col-3">
                       <div class=" show-action-btn">
+
+                        <!-- Single Task Action Button Part -->
                         <i class="material-icons taskReturn " *ngIf="task.isTaskInput"
-                          (click)="returnEditTask(task)">reply</i>
-                        <i class="material-icons taskSave" *ngIf="task.isTaskInput" (click)="updateTask(todo.id)">save</i>
-                        <i class="material-icons taskEdit " *ngIf="!task.isTaskInput" (click)="editTask(task)">edit</i>
+                          (click)="returnEditTask(task)" matTooltip="Cancel Update Task" matTooltipPosition="above">reply</i>
+                        <i class="material-icons taskSave" *ngIf="task.isTaskInput"
+                          (click)="updateTask(todo.id)" matTooltip="Update Task" matTooltipPosition="above">save</i>
+        
+                        <i class="material-icons taskEdit " *ngIf="!task.isTaskInput" (click)="editTask(task)" matTooltip="Edit Task" matTooltipPosition="above">edit</i>
                         <i class="material-icons taskDelete" *ngIf="!task.isTaskInput"
-                          (click)="deleteTask(todo.id,task)">delete</i>
+                          (click)="deleteTask(todo.id,task)" matTooltip="Delete Task" matTooltipPosition="above">delete</i>
                       </div>
                     </div>
                   </div>

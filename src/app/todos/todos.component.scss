@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&family=IBM+Plex+Serif:wght@300&family=K2D:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&family=IBM+Plex+Serif:wght@100&family=Open+Sans:wght@100&family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&family=IBM+Plex+Serif:wght@300&family=Open+Sans:wght@300&family=Roboto:wght@100&display=swap');
 
 
 ::-webkit-scrollbar {
@@ -51,6 +52,13 @@
     // color: #424242;
     color: black;
     // color: white;
+}
+
+.task-input{
+    font-family: 'Castoro Titling', cursive;
+    font-family: 'IBM Plex Serif', serif;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 //-------------------  for Loader css -------------------
@@ -112,6 +120,27 @@
 
 .list-item:hover .show-action-btn {
     display: inline !important;
+}
+
+::ng-deep .task-input .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix{
+    padding: 0 !important;
+    text-align: center;
+    display: flex !important;
+    align-items: center !important;
+    font-family: 'Castoro Titling', cursive;
+    font-family: 'IBM Plex Serif', serif;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+::ng-deep .task-input .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+}
+
+::ng-deep .task-input .mat-mdc-text-field-wrapper {
+    height: 20px !important;
+    flex: flex;
+    align-items: center;
 }
 
 
