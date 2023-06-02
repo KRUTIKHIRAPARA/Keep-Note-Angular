@@ -4,6 +4,7 @@
     width: 0px;
 }
 
+//------------------- for Todo Adding css -------------------
 .todo-add-header {
     height: 50px;
     display: flex;
@@ -21,6 +22,10 @@
     width: 40%;
 }
 
+.header-spacer {
+    flex: 1 1 auto;
+}
+
 .todo-body {
     width: 40%;
 }
@@ -32,7 +37,7 @@
     border-radius: 3px;
 }
 
-/*---------- for Loader css -----------*/
+//-------------------  for Loader css -------------------
 .overlay {
     position: fixed;
     display: block;
@@ -50,11 +55,6 @@
     display: block;
     width: 100%;
     z-index: 99999;
-}
-
-
-.header-spacer {
-    flex: 1 1 auto;
 }
 
 .taskEdit {
@@ -99,29 +99,13 @@
 }
 
 
-//-------------------   Media Qurey Css  -------------------
+//-------------------  for Media Qurey css  -------------------
 
 @media screen and (max-width:1400px) {
 
     .todo-add-inner-header,
     .todo-body {
         width: 50% !important;
-    }
-
-    .searchBox {
-        width: 35% !important;
-    }
-
-    .itemsContainer {
-        height: 150px;
-    }
-
-    .itemTitle {
-        font-size: 25px;
-    }
-
-    .itemAddBtn {
-        font-size: 22px;
     }
 }
 
@@ -131,23 +115,6 @@
     .todo-body {
         width: 60% !important;
     }
-
-    .searchBox {
-        width: 35% !important;
-    }
-
-    .itemsContainer {
-        height: 150px;
-    }
-
-    .itemTitle {
-        font-size: 23px;
-    }
-
-    .itemAddBtn {
-        font-size: 20px;
-    }
-
 }
 
 @media screen and (max-width:768px) {
@@ -156,18 +123,6 @@
     .todo-body {
         width: 95% !important;
     }
-
-    .searchBox {
-        width: 70% !important;
-    }
-
-    .itemTitle {
-        font-size: 21px;
-    }
-
-    .itemAddBtn {
-        font-size: 18px;
-    }
 }
 
 @media screen and (max-width:662px) {
@@ -175,26 +130,5 @@
     .todo-add-inner-header,
     .todo-body {
         width: 90% !important;
-    }
-
-    .searchBox {
-        width: 80% !important;
-    }
-
-    .itemTitle {
-        font-size: 19px;
-    }
-
-    .itemAddBtn {
-        font-size: 16px;
-    }
-
-}
-
-@media screen and (max-width:375px) {}
-
-@media screen and (max-width:320px) {
-    .searchBox {
-        width: 35% !important;
     }
 }

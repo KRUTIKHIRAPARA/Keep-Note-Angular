@@ -124,6 +124,7 @@ addSingleTask(todoId) {
 toggleAddTask(todo: Todos) {
   this.allTodos.forEach((todo)=>{
     todo.isInput = false;
+    todo.isEditInput = false;
   })
   if (todo.isInput) {
     this.Task = new Tasks;
