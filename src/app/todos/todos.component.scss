@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&family=IBM+Plex+Serif:wght@300&family=K2D:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&family=IBM+Plex+Serif:wght@100&family=Open+Sans:wght@100&family=Roboto:wght@100&display=swap');
+
 
 ::-webkit-scrollbar {
     width: 0px;
@@ -35,6 +37,20 @@
     border: none;
     border-bottom: 1px solid rgb(82, 82, 82);
     border-radius: 3px;
+}
+
+.todo-header {
+    background-color: rgb(180 203 233);
+}
+
+.todo-name {
+    font-family: 'Castoro Titling', cursive;
+    font-family: 'IBM Plex Serif', serif;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    // color: #424242;
+    color: black;
+    // color: white;
 }
 
 //-------------------  for Loader css -------------------
