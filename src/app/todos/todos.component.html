@@ -33,12 +33,14 @@
       </div>
       <div class="col-xxl-4 col-xl-4 col-lg-4 col-sm-4 col-6">
         <!-- Add Todo Button -->
-        <button mat-icon-button (click)="addTodo()" class="text-info" >
-          <mat-icon >addsave</mat-icon>
+        <button mat-icon-button (click)="addTodo()" class="text-info" matTooltip="Save New Todo"
+          matTooltipPosition="above">
+          <mat-icon>add</mat-icon>
         </button>
 
         <!-- Cancel Todo Button -->
-        <button mat-icon-button (click)="cancelUpdates()"  class="text-danger">
+        <button mat-icon-button (click)="cancelUpdates()" class="text-danger" matTooltip="Cancel New Todo"
+          matTooltipPosition="above">
           <mat-icon>cancel</mat-icon>
         </button>
       </div>
@@ -63,15 +65,14 @@
                 <div *ngIf="todo.isEditInput" class="d-flex">
                   <input type="text" [(ngModel)]="editTodos.name">
 
-                  <button mat-icon-button color="primary" (click)="updateTodo(todo)" matTooltip="Save New Todo"
+                  <button mat-icon-button color="primary" (click)="updateTodo(todo)" matTooltip="Save Update Todo"
                     matTooltipPosition="above">
                     <mat-icon>save</mat-icon>
                   </button>
-                  <button mat-icon-button color="warn" (click)="cancelUpdates()" matTooltip="Cancel New Todo"
+                  <button mat-icon-button color="warn" (click)="cancelUpdates()" matTooltip="Cancel Update Todo"
                     matTooltipPosition="above">
                     <mat-icon>cancel</mat-icon>
                   </button>
-
                 </div>
               </mat-card-title>
 

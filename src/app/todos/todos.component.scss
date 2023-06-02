@@ -21,11 +21,11 @@
     }
 }
 
-.todo-add-inner-header2{
+.todo-add-inner-header2 {
     font-size: 20px;
-        color: #ABABAB;
-        font-family: 'Inter';
-        letter-spacing: 2px;
+    color: #ABABAB;
+    font-family: 'Inter';
+    letter-spacing: 2px;
 }
 
 .todo-add-inner-header {
@@ -61,7 +61,7 @@
     // color: white;
 }
 
-.task-input{
+.task-input {
     font-family: 'Castoro Titling', cursive;
     font-family: 'IBM Plex Serif', serif;
     font-family: 'Open Sans', sans-serif;
@@ -129,7 +129,7 @@
     display: inline !important;
 }
 
-::ng-deep .task-input .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix{
+::ng-deep .task-input .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
     padding: 0 !important;
     text-align: center;
     display: flex !important;
@@ -150,9 +150,9 @@
     align-items: center;
 }
 
-.mat-mdc-form-field + .mat-mdc-form-field {
+.mat-mdc-form-field+.mat-mdc-form-field {
     margin-left: 8px;
-  }
+}
 
 
 //-------------------  for Media Qurey css  -------------------
@@ -163,15 +163,17 @@
     .todo-body {
         width: 50% !important;
     }
-    .add-todo-container{
+
+    .add-todo-container {
         width: 30% !important;
     }
 }
 
 @media screen and (max-width:1200px) {
-    .add-todo-container{
+    .add-todo-container {
         width: 40% !important;
     }
+
     .todo-add-inner-header,
     .todo-body {
         width: 60% !important;
@@ -186,13 +188,13 @@
         width: 95% !important;
     }
 
-    .add-todo-container{
+    .add-todo-container {
         width: 50% !important;
     }
 }
 
 @media screen and (max-width:425px) {
-    .add-todo-container{
+    .add-todo-container {
         width: 100% !important;
     }
 }
@@ -206,13 +208,13 @@
 }
 
 @media screen and (max-width:375px) {
-    .add-todo-container{
+    .add-todo-container {
         width: 100% !important;
     }
 }
 
 @media screen and (max-width:320px) {
-    .add-todo-container{
+    .add-todo-container {
         width: 100% !important;
     }
 }
