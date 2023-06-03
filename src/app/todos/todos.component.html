@@ -76,7 +76,7 @@
                 </div>
               </mat-card-title>
 
-              <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Edit & Delete Todo"
+              <button *ngIf="isTodoAction" mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Edit & Delete Todo"
                 matTooltipPosition="above">
                 <mat-icon>more_vert</mat-icon>
               </button>

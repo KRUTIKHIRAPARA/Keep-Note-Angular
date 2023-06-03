@@ -6,17 +6,20 @@
         {
           "id": 1,
           "todoId": 1,
-          "name": "Car "
+          "name": "Car ",
+          "isCompleted":false
         },
         {
           "id": 2,
           "todoId": 1,
-          "name": "Mobile "
+          "name": "Mobile ",
+          "isCompleted":true
         },
         {
           "id": 3,
           "todoId": 1,
-          "name": "Laptop "
+          "name": "Laptop ",
+          "isCompleted":true
         }
       ],
       "name": "Shoping",
@@ -28,17 +31,20 @@
         {
           "id": 1,
           "todoId": 2,
-          "name": "Research New Project "
+          "name": "Research New Project ",
+          "isCompleted":false
         },
         {
           "id": 2,
           "todoId": 2,
-          "name": "Complete DSA "
+          "name": "Complete DSA ",
+          "isCompleted":false
         },
         {
           "id": 3,
           "todoId": 2,
-          "name": "Create Website "
+          "name": "Create Website ",
+          "isCompleted":true
         }
       ],
       "name": "Work",
@@ -50,20 +56,22 @@
         {
           "id": 1,
           "todoId": 3,
-          "name": "Dhruv -1 "
+          "name": "Dhruv -1 ",
+          "isCompleted":true
         },
         {
           "id": 2,
           "todoId": 3,
-          "name": "Ankit -2 "
+          "name": "Ankit -2 ",
+          "isCompleted":false
         },
         {
           "id": 3,
           "todoId": 3,
-          "name": "Dhaval -3 "
+          "name": "Dhaval -3 ",
+          "isCompleted":true
         }
       ],
-      "isInput": false,
       "name": "Persons",
       "id": 3
     }

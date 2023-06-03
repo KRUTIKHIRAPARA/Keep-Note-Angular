@@ -24,6 +24,7 @@ export class TodosComponent {
 
   // Add Todo panel
   ispanelOpen = false;
+  isTodoAction = true;
 
   constructor(private _toastr: ToastrService, private _crud: TodoService) { }
 
@@ -147,6 +148,7 @@ export class TodosComponent {
 
   // Edit Todo Datas
   editTodo(todo: Todos) {
+    this.isTodoAction = false
     this.allTodos.forEach((todo) => {
       todo.isInput = false;
       todo.isEditInput = false;
@@ -162,6 +164,7 @@ export class TodosComponent {
   // Update Todo Datas 
   updateTodo(todo) {
     // console.log(this.editTodos);
+    this.isTodoAction = true;
     this._crud.loaderShow();
     this._crud.editTodo(this.editTodos).subscribe({
       next: (res) => {
@@ -252,6 +255,7 @@ export class TodosComponent {
 
   // Delete Todo Datas
   deleteTodo(todo) {
+    this.isTodoAction = false;
     this._crud.loaderShow();
     this._crud.deleteTodo(todo).subscribe({
       next: (res) => {
@@ -316,6 +320,7 @@ export class TodosComponent {
 
   // Cancle Update Data
   cancelUpdates() {
+    this.isTodoAction = true;
     this.Todo = new Todos;
     this.editTasks = new Tasks;
     this.editTodos = new Todos;
