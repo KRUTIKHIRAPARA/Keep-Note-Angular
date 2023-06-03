@@ -255,7 +255,7 @@ export class TodosComponent {
 
   // Delete Todo Datas
   deleteTodo(todo) {
-    this.isTodoAction = false;
+    this.isTodoAction = true;
     this._crud.loaderShow();
     this._crud.deleteTodo(todo).subscribe({
       next: (res) => {
