@@ -20,6 +20,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { TodosComponent } from './todos/todos.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatListModule,
     MatDividerModule,
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -120,10 +120,16 @@ export class TodosComponent {
   // Single Task Add Time Task Part Toggle
   toggleAddTask(todo: Todos) {
     this.Task = new Tasks;
+    
     this.allTodos.forEach((todo) => {
       todo.isInput = false;
       todo.isEditInput = false;
+
+      todo.tasks.forEach((task)=>{
+        task.isTaskInput = false;
+      });
     })
+
     if (todo.isInput) {
       this.Task = new Tasks;
       todo.isInput = false;

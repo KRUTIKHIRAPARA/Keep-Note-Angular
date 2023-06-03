@@ -6,24 +6,19 @@
         {
           "id": 1,
           "todoId": 1,
-          "name": "Car ",
-          "isCompleted": true
+          "name": "Car "
         },
         {
           "id": 2,
           "todoId": 1,
-          "name": "Mobile ",
-          "isCompleted": false
+          "name": "Mobile "
         },
         {
           "id": 3,
           "todoId": 1,
-          "name": "Laptop ",
-          "isCompleted": true
+          "name": "Laptop "
         }
       ],
-      "isInput": false,
-      "isEditInput": false,
       "name": "Shoping",
       "id": 1
     },
@@ -33,24 +28,19 @@
         {
           "id": 1,
           "todoId": 2,
-          "name": "Research New Project ",
-          "isCompleted": false
+          "name": "Research New Project "
         },
         {
           "id": 2,
           "todoId": 2,
-          "name": "Complete DSA ",
-          "isCompleted": true
+          "name": "Complete DSA "
         },
         {
           "id": 3,
           "todoId": 2,
-          "name": "Create Website ",
-          "isCompleted": true
+          "name": "Create Website "
         }
       ],
-      "isInput": false,
-      "isEditInput": false,
       "name": "Work",
       "id": 2
     },
@@ -60,25 +50,21 @@
         {
           "id": 1,
           "todoId": 3,
-          "name": "Dhruv -1 ",
-          "isCompleted": false
+          "name": "Dhruv -1 "
         },
         {
           "id": 2,
           "todoId": 3,
-          "name": "Ankit -2 ",
-          "isCompleted": true
+          "name": "Ankit -2 "
         },
         {
           "id": 3,
           "todoId": 3,
-          "name": "Dhaval -3 ",
-          "isCompleted": false
+          "name": "Dhaval -3 "
         }
       ],
       "isInput": false,
-      "isEditInput": false,
-      "name": "Person",
+      "name": "Persons",
       "id": 3
     }
   ]
